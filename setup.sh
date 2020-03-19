@@ -3,6 +3,8 @@ time=`date '+%Y%m%d_%H%M'`
 VAG_COMMON_DIR="/vagrant/"
 LOG_DIR="$VAG_COMMON_DIR/log"
 OUTFILE="$LOG_DIR/${time}_vagrant-out.log"
+FLASK_APP_BODY="flask_init.txt"
+FLASK_APP="/home/vagrant/hello.py"
 
 runSetup() {
     step=1
@@ -43,14 +45,20 @@ runSetup() {
     pip install flask  >> $OUTFILE 2>&1 
     [ $? -ne 0 ] && exit 1
 
-    touch hello.py
-    cat /vagrant/flask_init.txt > hello.py 
-
+    touch $FLASK_APP
+    cat /$VAG_COMMON_DIR/$FLASK_APP_BODY > $FLASK_APP 
+    # Enabling auto run of Flask on reboot
+    chmod -x $FLASK_APP
+    echo "@reboot nohup /usr/bin/python3 $FLASK_APP >> /dev/null 2>&1 &" > temp_cron
+    crontab temp_cron
+    rm temp_cron
+    # Making a Script to enable killing Flask process ran by hello.py
+    echo $'kill -9 `ps aux | grep hello.py | grep -v grep | awk \'{ print $2 }\'`' > killFlask.sh
+    chmod +x killFlask.sh
     echo " "
 
     echo "$((step++)). Initiating Flask..."
-
-    /usr/bin/python3 hello.py
+    nohup /usr/bin/python3 $FLASK_APP >> /dev/null 2>&1 &
     echo " "
     
     exit 0
