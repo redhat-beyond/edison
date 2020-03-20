@@ -48,7 +48,7 @@ runSetup() {
     touch $FLASK_APP
     cat /$VAG_COMMON_DIR/$FLASK_APP_BODY > $FLASK_APP 
     # Enabling auto run of Flask on reboot
-    chmod -x $FLASK_APP
+    chmod +x $FLASK_APP
     echo "@reboot nohup /usr/bin/python3 $FLASK_APP >> /dev/null 2>&1 &" > temp_cron
     crontab temp_cron
     rm temp_cron
