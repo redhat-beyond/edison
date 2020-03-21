@@ -1,64 +1,64 @@
 #!/bin/bash
-time=`date '+%Y%m%d_%H%M'`
-VAG_COMMON_DIR="/vagrant/"
+time=`TZ=Asia/Jerusalem date '+%Y%m%d_%H%M'`
+VAG_COMMON_DIR="/vagrant"
+HOME="/home/vagrant"
 LOG_DIR="$VAG_COMMON_DIR/log"
 OUTFILE="$LOG_DIR/${time}_vagrant-out.log"
-FLASK_APP_BODY="flask_init.txt"
-FLASK_APP="/home/vagrant/hello.py"
+FLASK_APP_PY="$VAG_COMMON_DIR/flask_init.py"
+FLASK_DIR="$HOME/FlaskApp"
+FLASK_EXEC="$HOME/flaskOnBoot.sh"
+KILLFLASK_SCRIPT="$VAG_COMMON_DIR/killFlask.sh"
+PYTHON3="`which python3`"
+FLASK_ONBOOT=false # Currently Flask On Startup feature disabled [ Not Supported ]
 
 runSetup() {
     step=1
 
-    if [ ! -d $LOG_DIR ]; then
-        mkdir $LOG_DIR
+    if [ ! -e $FLASK_APP_PY ]; then
+        echo "ERROR: Missing $FLASK_APP_PY file..." >> $OUTFILE
+        exit 1
+    else
+        chmod +x $FLASK_APP_PY
     fi
 
-    if [ ! -e $OUTFILE ]; then
-        touch $OUTFILE
+    if [ ! -d $FLASK_DIR ]; then
+        mkdir $FLASK_DIR
+    fi
+
+    if [ ! -d $LOG_DIR ]; then
+        mkdir $LOG_DIR
+    else
+        rm -f $LOG_DIR/*vagrant-out.log
+    fi
+    touch $OUTFILE
+    # Adding execution permission to $KILLFLASK_SCRIPT 
+    if [ -e $KILLFLASK_SCRIPT ]; then
+        chmod +x $KILLFLASK_SCRIPT
     fi
 
     echo " "
     echo " "
     echo "==> Running Provision Script: $0:"
     echo " "
-    echo "$((step++)). Updating apt-git repositories..."
-    sudo apt-get update  >> $OUTFILE 2>&1 
-    [ $? -ne 0 ] && exit 1
-    sudo apt-get -yq install software-properties-common >> $OUTFILE 2>&1 
-    [ $? -ne 0 ] && exit 1
+    echo "$((step++)). Installing & Activating Python-3 Virtual Environment..."
+    sudo apt-get install -yq python3-venv >> $OUTFILE 2>&1 
+    cd $FLASK_DIR
+    $PYTHON3 -m venv venv
+    source venv/bin/activate
     echo " "
-
-    echo "$((step++)). Installing Python & PIP..."
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py  >> $OUTFILE 2>&1 
-    [ $? -ne 0 ] && exit 1
-
-    /usr/bin/python3 get-pip.py  >> $OUTFILE 2>&1 
-    [ $? -ne 0 ] && exit 1
-
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install python3-dev python3-pip  >> $OUTFILE 2>&1 
-    [ $? -ne 0 ] && exit 1
-
-    pip install --upgrade pip >> $OUTFILE 2>&1 
-    echo " "
-
     echo "$((step++)). Installing Flask..."
-    pip install flask  >> $OUTFILE 2>&1 
-    [ $? -ne 0 ] && exit 1
+    pip install Flask >> $OUTFILE 2>&1
 
-    touch $FLASK_APP
-    cat /$VAG_COMMON_DIR/$FLASK_APP_BODY > $FLASK_APP 
-    # Enabling auto run of Flask on reboot
-    chmod +x $FLASK_APP
-    echo "@reboot nohup /usr/bin/python3 $FLASK_APP >> /dev/null 2>&1 &" > temp_cron
-    crontab temp_cron
-    rm temp_cron
-    # Making a Script to enable killing Flask process ran by hello.py
-    echo $'kill -9 `ps aux | grep hello.py | grep -v grep | awk \'{ print $2 }\'`' > killFlask.sh
-    chmod +x killFlask.sh
+    # Set Flask Run On Starup:
+    if [ $FLASK_ONBOOT == true ] && [ -e $FLASK_EXEC ]; then
+        echo "@reboot $FLASK_EXEC >> /dev/null 2>&1 &" > temp_cron
+        crontab temp_cron
+        rm temp_cron
+    fi
     echo " "
-
-    echo "$((step++)). Initiating Flask..."
-    nohup /usr/bin/python3 $FLASK_APP >> /dev/null 2>&1 &
+    echo "$((step++)). Initiating Flask Server..."
+    export FLASK_APP=$FLASK_APP_PY 
+    flask run --host=0.0.0.0 >> /dev/null 2>&1 &
     echo " "
     
     exit 0
