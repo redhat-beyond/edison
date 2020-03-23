@@ -1,18 +1,32 @@
 #!/bin/bash
+
 time=`TZ=Asia/Jerusalem date '+%Y%m%d_%H%M'`
 VAG_COMMON_DIR="/vagrant"
 HOME="/home/vagrant"
 LOG_DIR="$VAG_COMMON_DIR/log"
 OUTFILE="$LOG_DIR/${time}_vagrant-out.log"
 FLASK_APP_PY="$VAG_COMMON_DIR/flask_init.py"
-FLASK_DIR="$HOME/FlaskApp"
 FLASK_EXEC="$HOME/runFlask.sh"
+FLASK_LOG="$LOG_DIR/flask-out.log"
 KILLFLASK_SCRIPT="$VAG_COMMON_DIR/killFlask.sh"
-PYTHON3="`which python3`"
 FLASK_ONBOOT=false # Currently Flask On Startup feature disabled [ Not Supported ]
 
 runSetup() {
     step=1
+
+    if [ ! -d $LOG_DIR ]; then
+        mkdir $LOG_DIR
+    else
+        # Deleting all vagrant-out log files except for the 5 most recent
+        cd $LOG_DIR
+        ls -t | grep vagrant-out.log$ | tail -n +6 | xargs -d '\n' -r rm --
+        cd $HOME
+    fi
+    touch $OUTFILE
+
+    if [ ! -e $FLASK_LOG ]; then
+        touch $FLASK_LOG
+    fi
 
     if [ ! -e $FLASK_APP_PY ]; then
         echo "ERROR: Missing $FLASK_APP_PY file..." >> $OUTFILE
@@ -21,16 +35,6 @@ runSetup() {
         chmod +x $FLASK_APP_PY
     fi
 
-    if [ ! -d $FLASK_DIR ]; then
-        mkdir $FLASK_DIR
-    fi
-
-    if [ ! -d $LOG_DIR ]; then
-        mkdir $LOG_DIR
-    else
-        rm -f $LOG_DIR/*vagrant-out.log
-    fi
-    touch $OUTFILE
     # Adding execution permission to $KILLFLASK_SCRIPT 
     if [ -e $KILLFLASK_SCRIPT ]; then
         chmod +x $KILLFLASK_SCRIPT
@@ -40,14 +44,12 @@ runSetup() {
     echo " "
     echo "==> Running Provision Script: $0:"
     echo " "
-    echo "$((step++)). Installing & Activating Python-3 Virtual Environment..."
-    sudo apt-get install -yq python3-venv >> $OUTFILE 2>&1 
-    cd $FLASK_DIR
-    $PYTHON3 -m venv venv
-    source venv/bin/activate
-    echo " "
+    echo "$((step++)). Installing Python PIP3..."
+    sudo apt-get -yq update >> $OUTFILE 2>&1
+    sudo apt-get -yq install python3-pip >> $OUTFILE 2>&1
+    echo ""
     echo "$((step++)). Installing Flask..."
-    pip install Flask >> $OUTFILE 2>&1
+    sudo pip3 install Flask >> $OUTFILE 2>&1
 
     # Set Flask Run On Starup:
     if [ $FLASK_ONBOOT == true ] && [ -e $FLASK_EXEC ]; then
@@ -58,7 +60,7 @@ runSetup() {
     echo " "
     echo "$((step++)). Initiating Flask Server..."
     export FLASK_APP=$FLASK_APP_PY 
-    flask run --host=0.0.0.0 >> /dev/null 2>&1 &
+    flask run --host=0.0.0.0 >> $FLASK_LOG 2>&1 &
     echo " "
     
     exit 0
