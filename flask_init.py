@@ -1,10 +1,10 @@
-from flask import Flask, make_response
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-	return make_response('Hello World!', 200)
+	return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
