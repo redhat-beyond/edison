@@ -11,7 +11,7 @@ sudo apt install -y python3-pip
 pip3 install --upgrade pip
 
 echo "installing flask"
-#'python3 -m' was added to avoid warnings
+#'python3 -m' has been added to avoid warnings
 python3 -m pip install flask
 
 echo "running flask_init.py"
