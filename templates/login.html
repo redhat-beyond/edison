@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>edison</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="background-color: rgb(116,116,116);background-image: url(&quot;assets/img/background.jpg&quot;);">
+    <div class="container text-center vh-100">
+        <div class="row justify-content-center h-100" style="background-color: rgba(0,0,0,0);filter: blur(0px);">
+            <div class="col d-md-flex justify-content-md-center align-items-md-center h-100" style="padding: 50px;">
+                <div class="row h-50 w-75" id="login_screen">
+                    <div class="col" id="left_signup" style="display:block;padding: 0;padding-top: 15px;padding-bottom: 15px;">
+                        <div class="text-left rounded-left h-100" style="padding: 25px;background-color: rgba(0,0,0,0.7);padding-top: 50px;">
+                            <div id="sub_text_div" style="position: absolute">
+                                <h2 class="text-left text-white" style="font-family: 'Fira Sans Extra Condensed', sans-serif;">Don't Have an account?</h2>
+                                <p class="text-left text-light" style="font-size: 14px;font-family: 'Fira Sans Extra Condensed', sans-serif;">Come and join us to Edison Smart Home network.</p><button class="btn btn-outline-secondary text-center w-50" id="btn_signup" type="button" style="font-family: 'Fira Sans Extra Condensed', sans-serif;">SIGN UP</button></div>
+                        </div>
+                    </div>
+                    <div class="col" id="main_block_column" style="display:block;background-color: rgba(255,255,255,0);padding: 0;">
+                        <div class="text-left bg-white border rounded border-dark shadow h-100" id="main_block" style="background-color: #ffffff;position: absolute;padding: 20px;padding-top: 40px;padding-left: 30px;padding-bottom: 40px;padding-right: 30px;">
+                            <div class="row h-75">
+                                <div class="col">
+									<div class="row">
+										<div class="col-md-8">
+											<h1 id="main_block_title" class="text-uppercase text-primary" style="font-family: 'Advent Pro', sans-serif;">log in</h1>
+										</div>
+										<div class="col-md-4 text-right">
+											<img src="assets/img/logo.png" class="h-75"/>						
+										</div>
+									</div>
+									<span id="error_message" style="color:red;"></span>
+									<input id="main_form_email" type="email" class="w-100 border-bottom border-left-0 border-right-0 border-top-0" required="" placeholder="Email" style="margin-bottom: 10px;font-family: 'Fira Sans Extra Condensed', sans-serif;">
+                                    <input id="main_form_password" type="password" class="w-100 border-bottom border-left-0 border-right-0 border-top-0" placeholder="Password" style="font-family: 'Fira Sans Extra Condensed', sans-serif;"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><a class="btn btn-outline-link text-left w-100" role="button" id="btn_forgot_password" style="padding: 0;padding-top: 6px;">Forgot Password?</a></div>
+                                <div class="col-md-6 text-right"><button class="btn btn-primary text-center w-100" id="main_block_btn" type="button" style="font-family: 'Fira Sans Extra Condensed', sans-serif;">LOG IN</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="right_login" style="display:none;padding: 0;padding-top: 15px;padding-bottom: 15px;">
+                        <div class="text-left h-100 rounded-right" style="padding: 25px;background-color: rgba(0,0,0,0.7);padding-top: 50px;">
+                            <div id="sub_right_text_div" style="position: absolute">
+                                <h2 class="text-left text-white" style="font-family: 'Fira Sans Extra Condensed', sans-serif;">Have an account?</h2>
+                                <p class="text-left text-light" style="font-size: 14px;font-family: 'Fira Sans Extra Condensed', sans-serif;">Come on and login to Edison Smart Home network.</p><button class="btn btn-outline-secondary text-center w-50" id="btn_right_login" type="button" style="font-family: 'Fira Sans Extra Condensed', sans-serif;">LOGIN</button></div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 d-flex" id="right_edge" style="padding: 0;margin: 0;padding-top: 15px;padding-bottom: 15px;opacity: 1;">
+                        <div class="w-100 rounded-right" style="background-color: rgba(0,0,0,0.7);padding-top: 0;padding-bottom: 0;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
