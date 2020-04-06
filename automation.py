@@ -1,17 +1,16 @@
+
 import unittest
-from flask_init import app
+import requests
+
+from flask_init import index
+
+
+
 class Tester(unittest.TestCase):
-	def test_init_server(self):
-		tester = app.test_client(self)
-		response = tester.get('/', content_type='html/text')
-		self.assertEqual(response.status_code, 200)
-		
-	def test_Failure(self):
-		tester = app.test_client(self)
-		response = tester.get('a', content_type='html/text')
-		self.assertEqual(response.status_code, 404)
-		
+    def test_request_response(self):
+    	response = requests.get("http://127.0.0.1:5000")
+        self.assertEqual(response.status_code, 200)
 
-if __name__ == '__main__':
-	unittest.main()
 
+if __name__ == "__main__":
+    unittest.main()
