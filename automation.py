@@ -2,9 +2,6 @@
 import unittest
 import requests
 
-from flask_init import index
-
-
 
 class Tester(unittest.TestCase):
     def test_request_response(self):
