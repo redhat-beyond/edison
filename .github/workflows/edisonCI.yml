@@ -23,7 +23,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        sudo apt install -y python3-pip
+        sudo apt-get install -y python3-pip
         pip3 install -r requirements.txt
     - name: Lint with flake8
       run: |
