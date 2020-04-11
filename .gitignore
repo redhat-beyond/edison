@@ -2,3 +2,5 @@
 /*.log
 /.vagrant/*
 */.idea/*
+*.box
+*.pyc

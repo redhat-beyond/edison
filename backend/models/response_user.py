@@ -9,6 +9,7 @@ class ResponseUser:
         self.username = user.username
         self.first_name = user.first_name
         self.last_name = user.last_name
+        self.email = user.email
 
     def __repr__(self):
         return f"<Response user: id = {self.id}, first_name = {self.first_name}, " \
