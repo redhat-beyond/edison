@@ -1,16 +1,19 @@
 #!/bin/bash
 
 echo "updating apt before installation"
-sudo apt update
+sudo apt-get update
 
 echo "installing python 3.7"
-sudo apt install -y python3.7 
+sudo apt-get install -y python3.7 
 
 echo "installing python3-pip"
-sudo apt install -y python3-pip
+sudo apt-get install -y python3-pip
 
-echo "installing flask"
-pip3 install flask
+echo "installing PostgreSQL"
+sudo apt-get install -y postgresql postgresql-contrib
+
+echo "install requirements"
+pip3 install -r /vagrant/requirements.txt
 
 echo "installing flask restful"
 pip3 install flask-restful

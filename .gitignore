@@ -4,3 +4,4 @@
 */.idea/*
 *.box
 *.pyc
+_pycache_/
