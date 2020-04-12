@@ -2,11 +2,12 @@ from backend import db
 from datetime import datetime
 import backend.models as models
 
+
 class DBHandler:
 
     @staticmethod
     def get_by_username(model, username):
-        return model.query.filter_by(username = username).first()
+        return model.query.filter_by(username=username).first()
 
     @staticmethod
     def get_by_id(model, _id):
