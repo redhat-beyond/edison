@@ -15,21 +15,6 @@ sudo apt-get install -y postgresql postgresql-contrib
 echo "install requirements"
 pip3 install -r /vagrant/requirements.txt
 
-echo "installing flask restful"
-pip3 install flask-restful
-
-echo "installing flask jwt"
-pip3 install flask-jwt-extended
-
-echo "installing passlib"
-pip3 install passlib
-
-echo "installing flask-sqlalchemy"
-pip3 install flask-sqlalchemy
-
-echo "installing psycopg2-binary"
-pip3 install psycopg2-binary
-
 echo "installing postgresql"
 sudo apt-get install -y postgresql postgresql-contrib
 
