@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 
+
 db_role = 'postgres'
 db_password = 'edison'
 db_url = '0.0.0.0'

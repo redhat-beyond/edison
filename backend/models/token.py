@@ -4,7 +4,8 @@ from backend import db
 class Token(db.Model):
     __tablename__ = 'token_blacklist'
 
-    jti = db.Column(db.String(150), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    jti = db.Column(db.String(150), nullable=False, unique=True)
     creation_timestamp = db.Column(db.TIMESTAMP(timezone=False), nullable=False)
 
     def __repr__(self):
