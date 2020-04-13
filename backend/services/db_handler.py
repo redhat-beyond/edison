@@ -1,34 +1,29 @@
 from backend import db
 from datetime import datetime
+from .base_storage_handler import BaseStorageHandler
 import backend.models as models
 
 
-class DBHandler:
+class DBHandler(BaseStorageHandler):
 
-    @staticmethod
-    def get_by_username(model: db.Model, username: str):
+    def get_by_username(self, model: db.Model, username: str):
         return model.query.filter_by(username=username).first()
 
-    @staticmethod
-    def get_by_id(model: db.Model, _id: int):
+    def get_by_id(self, model: db.Model, _id: int):
         return model.query.get(_id)
 
-    @staticmethod
-    def get_all(model: db.Model):
+    def get_all(self, model: db.Model):
         return model.query.all()
 
-    @staticmethod
-    def add(model: db.Model):
+    def add(self, model: db.Model):
         db.session.add(model)
         db.session.commit()
 
-    @staticmethod
-    def delete(model: db.Model):
+    def delete(self, model: db.Model):
         db.session.delete(model)
         db.session.commit()
     
-    @staticmethod
-    def update_user(updated_user: db.Model, username: str):
+    def update_user(self, updated_user: db.Model, username: str):
         user_to_be_updated = DBHandler.get_by_username(models.User, username)
         if user_to_be_updated is None:
             raise ValueError(f"The user with username: {username} is not in the DB.")
@@ -42,12 +37,10 @@ class DBHandler:
 
         return user_to_be_updated
 
-    @staticmethod
-    def add_blacklisted_jti(jti: str):
+    def add_blacklisted_jti(self, jti: str):
         blacklisted_token = models.Token(jti, datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
         db.session.add(blacklisted_token)
         db.session.commit()
 
-    @staticmethod
-    def is_jti_blacklisted(jti: str):
+    def is_jti_blacklisted(self, jti: str):
         return models.Token.query.get(jti) is not None
