@@ -43,4 +43,4 @@ class DBHandler(BaseStorageHandler):
         db.session.commit()
 
     def is_jti_blacklisted(self, jti: str):
-        return models.Token.query.get(jti) is not None
+        return models.Token.query.filter_by(jti=jti).first() is not None
