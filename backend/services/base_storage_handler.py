@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from backend import db
-
+from typing import Dict
 
 class BaseStorageHandler(ABC):
 
     @abstractmethod
-    def get_by_username(self, model: db.Model, username: str):
+    def get_by_filters(self, model: db.Model, filters: Dict[str, str]):
         pass
 
     @abstractmethod
@@ -25,13 +25,5 @@ class BaseStorageHandler(ABC):
         pass
 
     @abstractmethod
-    def update_user(self, updated_user: db.Model, username: str):
-        pass
-
-    @abstractmethod
-    def add_blacklisted_jti(self, jti: str):
-        pass
-
-    @abstractmethod
-    def is_jti_blacklisted(self, jti: str):
+    def update(self):
         pass
