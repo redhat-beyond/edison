@@ -1,8 +1,11 @@
+FLASK_PORT=5000
+POSTGRESQL_PORT=5432
+
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/ubuntu-18.04"
-  config.vm.box_version = "202002.14.0"
-  config.vm.provision :shell, path: "setup.sh", :privileged => false 
-  config.vm.network :forwarded_port, guest: 5000, host: 5000, host_ip: "127.0.0.1"
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.provision :shell, path: "setup.sh"
+  config.vm.network :forwarded_port, guest: FLASK_PORT, host: FLASK_PORT
+ config.vm.network :forwarded_port, guest: POSTGRESQL_PORT, host: POSTGRESQL_PORT
   config.vm.provider "virtualbox" do |v|
     v.gui = false
     v.name = "Edison_test"
