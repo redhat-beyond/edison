@@ -28,6 +28,6 @@ echo "running flask_serve_static.py"
 export FLASK_APP=/vagrant/flask_serve_static.py
 flask run -h 0.0.0.0 -p 5000 >> /vagrant/flask_serve_static.log 2>&1 &
 
-echo "running app.py"
-export FLASK_APP=/vagrant/backend/app.py
-flask run -h 0.0.0.0 -p 3000 >> /vagrant/app.log 2>&1 &
+echo "running flask_restful_api.py"
+export FLASK_APP=/vagrant/backend/flask_restful_api.py
+flask run -h 0.0.0.0 -p 3000 >> /vagrant/flask_restful_api.log 2>&1 &
