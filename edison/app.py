@@ -11,7 +11,6 @@ from flask_migrate import Migrate
 app = edison.app
 db = edison.db
 migrate = Migrate(app, db)
-# Creates all tables in app. Table's name defined with __tablename__ variable.
 api = Api(app)
 # Creation of Json-Web-Token manager.
 # In order to reach secured endpoints client should add an authorization header with the value Bearer <token>.
