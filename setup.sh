@@ -1,5 +1,8 @@
 #!/bin/bash
 
+FLASK_SERVE_STATIC_PORT=5000
+FLASK_RESTFUL_PORT=3000
+
 echo "updating apt before installation"
 sudo apt-get update
 
@@ -26,8 +29,8 @@ export FLASK_ENV=development
 
 echo "running flask_serve_static.py"
 export FLASK_APP=/vagrant/flask_serve_static.py
-flask run -h 0.0.0.0 -p 5000 >> /vagrant/flask_serve_static.log 2>&1 &
+flask run -h 0.0.0.0 -p $FLASK_SERVE_STATIC_PORT >> /vagrant/flask_serve_static.log 2>&1 &
 
-echo "running app.py"
-export FLASK_APP=/vagrant/backend/app.py
-flask run -h 0.0.0.0 -p 3000 >> /vagrant/app.log 2>&1 &
+echo "running flask_restful_api.py"
+export FLASK_APP=/vagrant/backend/flask_restful_api.py
+flask run -h 0.0.0.0 -p $FLASK_RESTFUL_PORT >> /vagrant/flask_restful_api.log 2>&1 &
