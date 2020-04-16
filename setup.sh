@@ -15,9 +15,6 @@ sudo apt-get install -y postgresql postgresql-contrib
 echo "install requirements"
 pip3 install -r /vagrant/requirements.txt
 
-echo "installing postgresql"
-sudo apt-get install -y postgresql postgresql-contrib
-
 echo "configuring database"
 sudo su postgres <<POSTGRESQL_COMMANDS
 psql
@@ -25,9 +22,11 @@ CREATE DATABASE edison;
 ALTER ROLE postgres WITH PASSWORD 'edison';
 POSTGRESQL_COMMANDS
 
-echo "running flask_init.py"
-export FLASK_APP=/vagrant/flask_init.py
-flask run -h 0.0.0.0 -p 5000 >> /vagrant/flask_init.log 2>&1 &
+export FLASK_ENV=development
+
+echo "running flask_serve_static.py"
+export FLASK_APP=/vagrant/flask_serve_static.py
+flask run -h 0.0.0.0 -p 5000 >> /vagrant/flask_serve_static.log 2>&1 &
 
 echo "running app.py"
 export FLASK_APP=/vagrant/backend/app.py
