@@ -1,5 +1,7 @@
-
-#Build result
-
-*.log
+*/*.log
+/*.log
+/.vagrant/*
+*/.idea/*
+*.box
+*.pyc
 _pycache_/
