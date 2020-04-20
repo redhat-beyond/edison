@@ -9,4 +9,4 @@ class Token(db.Model):
     creation_timestamp = db.Column(db.TIMESTAMP(timezone=False), nullable=False)
 
     def __repr__(self):
-        return f"<Token: jti: {self.jti}, creation time: {self.creation_timestamp}."
+        return f"<Token: jti: {self.jti}, creation time: {self.creation_timestamp}>"
