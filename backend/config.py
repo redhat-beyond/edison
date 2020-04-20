@@ -33,7 +33,6 @@ class Config:
 
 class ProductionConfig(Config):
     ENV_KEYWORD = "production"
-    pass
 
 class DevelopmentConfig(Config):
     ENV_KEYWORD = "development"
