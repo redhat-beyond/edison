@@ -1,4 +1,4 @@
-from backend import db
+from edison import db
 
 
 class User(db.Model):
