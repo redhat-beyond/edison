@@ -1,5 +1,7 @@
 #!/bin/bash
 
+FLASK_PORT=5000
+
 echo "updating apt before installation"
 sudo apt-get update
 
@@ -15,6 +17,15 @@ sudo apt-get install -y postgresql postgresql-contrib
 echo "install requirements"
 pip3 install -r /vagrant/requirements.txt
 
-echo "running flask_init.py"
-export FLASK_APP=/vagrant/flask_init.py
-python3 -m flask run --host=0.0.0.0 >> /vagrant/log.log 2>&1 &
+echo "configuring database"
+sudo su postgres <<POSTGRESQL_COMMANDS
+psql
+CREATE DATABASE edison;
+ALTER ROLE postgres WITH PASSWORD 'edison';
+POSTGRESQL_COMMANDS
+
+export FLASK_ENV=development
+
+echo "running app.py"
+export FLASK_APP=/vagrant/edison/app.py
+flask run -h 0.0.0.0 -p $FLASK_PORT >> /vagrant/edison/app.log 2>&1 &
