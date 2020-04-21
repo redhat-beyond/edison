@@ -1,7 +1,8 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from backend.config import get_config_object
-import os
+from edison.config import get_config_object
 
 
 # Put app and db here so the entire app could import them.
