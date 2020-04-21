@@ -1,5 +1,6 @@
 import edison
 
+from flask import render_template
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
@@ -13,3 +14,7 @@ api = Api(app)
 # Creation of Json-Web-Token manager.
 # In order to reach secured endpoints client should add an authorization header with the value Bearer <token>.
 jwt = JWTManager(app)
+
+@app.route("/")
+def index():
+	return render_template('index.html')
