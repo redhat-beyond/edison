@@ -17,6 +17,7 @@ sudo apt-get install -y postgresql postgresql-contrib
 echo "install requirements"
 pip3 install -r /vagrant/requirements.txt
 
+<<<<<<< HEAD
 echo "running app.py"
 export FLASK_APP=/vagrant/edison/app.py
 flask run -h 0.0.0.0 -p $FLASK_PORT >> /vagrant/edison/app.log 2>&1 &
