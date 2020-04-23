@@ -1,14 +1,15 @@
 .page-footer {
-    background-color: #222;
-    color: #ccc;
-    padding: 60px 30px;
-  }
-  .footer-copyright {
-    color: #666;
-    padding: 60px;
-  }
+  background-color: #222;
+  color: #ccc;
+  padding: 60px 30px;
+}
 
-  .block {
-      display: inline-block;
-      
-  }
+.footer-copyright {
+  color: #666;
+  padding: 60px;
+}
+
+.block {
+  display: inline-block;
+
+}
