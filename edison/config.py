@@ -19,7 +19,11 @@ def get_config_object(env_keyword: str):
 class Config:
     ENV_KEYWORD = ""
     DEBUG = False
+    # Turns off the Flask-SQLAlchemy event system
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:edison@127.0.0.1/edison'
 
+# PostgreSQL connection string should be updated once an actual production environment is established.
 class ProductionConfig(Config):
     ENV_KEYWORD = "production"
 
