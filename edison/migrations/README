@@ -1,0 +1,43 @@
+This information and more can be found at - https://flask-migrate.readthedocs.io/
+
+The content of edison/migrations folder is auto-created by Flask-Migrate extension.
+Flask-Migrate is an extension that configures Alembic in the proper way to work with Flask and Flask-SQLAlchemy application.
+In terms of the actual database migrations, everything is handled by Alembic so you get exactly the same functionality.
+
+FAQ
+
+1.  Why to use database migrations ?
+
+    Database migrations basically track granular changes to our database schema.
+    These granular changes are typically reflected as separate scripted files.
+    Every time we make a change to our database schema we should perform a migration.
+    This migration creates a new file that describes our current database schema inside edison/migrations/versions.
+    That way we could downgrade or upgrade our database schema to different versions if needed.
+
+2.  When to use database migration ?
+
+    You should perform a database migration on any change you make to the database models.
+    When a migration is performed it applies those changes to the database itself.
+
+3.  How to perform a database migration ?
+
+    -   First, we need to initialize our migrations folder (If it's not already created).
+        To do so you should first make sure to define the Flask app path inside FLASK_APP environment variable,
+        and then execute the following command:
+            flask db init
+        Executing this command will create the migrations folder inside /home/vagrant/migrations,
+        which is not good for us because we want it to be created in our project directory.
+        So we simply need to add the directory flag:
+            flask db init --directory /vagrant/edison/migrations
+        
+    -   Then, we should perform the migration as follow:
+            flask db migrate -m "<migration message>" --directory /vagrant/edison/migrations
+        It will create a new version file of the database schema inside edison/migrations/versions.
+
+    -   Last, we need to apply this migration on the database itself by executing:
+            flask db upgrade --directory /vagrant/edison/migrations.
+
+4.  How to downgrade the database schema ?
+
+    Simply execute the following command:
+        flask db downgrade --directory /vagrant/edison/migrations.

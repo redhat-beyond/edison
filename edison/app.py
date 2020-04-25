@@ -1,12 +1,14 @@
 import edison
 
 from flask import render_template
+from flask_migrate import Migrate
 
 
 # API description in swagger - https://app.swaggerhub.com/apis/DoRTaL94/UserManagment/1.0.0
 
 app = edison.app
 db = edison.db
+migrate = Migrate(app, db)
 
 # Creates all tables defined in the database models and the only ones that are not created yet.
 # If there's any change in the database models you should perform a migration to apply this change in the database itself.
