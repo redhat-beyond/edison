@@ -1,6 +1,11 @@
-from flask import Flask, render_template
+import edison
 
-app = Flask(__name__)
+from flask import render_template
+
+
+# API description in swagger - https://app.swaggerhub.com/apis/DoRTaL94/UserManagment/1.0.0
+
+app = edison.app
 
 @app.route("/")
 def index():
