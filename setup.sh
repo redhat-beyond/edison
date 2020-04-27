@@ -17,6 +17,10 @@ sudo apt-get install -y postgresql postgresql-contrib
 echo "install requirements"
 pip3 install -r /vagrant/requirements.txt
 
+echo "configuring database"
+sudo -u postgres createdb edison
+sudo -u postgres psql -c "ALTER ROLE postgres WITH PASSWORD 'edison';"
+
 export FLASK_ENV=development
 
 echo "running app.py"
