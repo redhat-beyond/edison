@@ -18,11 +18,8 @@ echo "install requirements"
 pip3 install -r /vagrant/requirements.txt
 
 echo "configuring database"
-sudo su postgres <<POSTGRESQL_COMMANDS
-psql
-CREATE DATABASE edison;
-ALTER ROLE postgres WITH PASSWORD 'edison';
-POSTGRESQL_COMMANDS
+sudo -u postgres createdb edison
+sudo -u postgres psql -c "ALTER ROLE postgres WITH PASSWORD 'edison';"
 
 export FLASK_ENV=development
 

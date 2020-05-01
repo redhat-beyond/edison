@@ -31,6 +31,7 @@ class Config:
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:edison@127.0.0.1/edison'
 
+# PostgreSQL connection string should be updated once an actual production environment is established.
 class ProductionConfig(Config):
     ENV_KEYWORD = "production"
 
