@@ -4,8 +4,6 @@ from flask import render_template
 from flask_migrate import Migrate
 
 
-# API description in swagger - https://app.swaggerhub.com/apis/DoRTaL94/UserManagment/1.0.0
-
 app = edison.app
 db = edison.db
 migrate = Migrate(app, db)
