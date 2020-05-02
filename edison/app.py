@@ -6,8 +6,6 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
 
-# API description in swagger - https://app.swaggerhub.com/apis/DoRTaL94/UserManagment/1.0.0
-
 app = edison.app
 db = edison.db
 api = Api(app)
