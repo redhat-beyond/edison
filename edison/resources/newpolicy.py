@@ -8,7 +8,7 @@ from psycopg2.errors import UniqueViolation
 from sqlalchemy.exc import IntegrityError
 
 
-class Policy(Resource):
+class NewPolicy(Resource):
     # RequestParser enforces arguments in requests.
     # If one of the arguments not exists, client gets an error response.
     parser = reqparse.RequestParser()
@@ -35,7 +35,7 @@ class Policy(Resource):
 
     @jwt_required
     def post(self, username: str):
-        data = Policy.parser.parse_args()
+        data = NewPolicy.parser.parse_args()
         status = 200
         response = {}
 
