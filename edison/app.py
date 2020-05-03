@@ -1,6 +1,9 @@
-from flask import Flask, render_template
+import edison
 
-app = Flask(__name__)
+from flask import render_template
+
+
+app = edison.app
 
 @app.route("/")
 def index():
