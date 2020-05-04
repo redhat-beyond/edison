@@ -3,22 +3,21 @@ import sys
 
 
 def get_config_object(env_keyword: str):
-    """
-    Returns the wanted environment details to configure the app
 
-    the function iterate on a dictionary which is build by inspect.
-    the dictionary has key - name, and value - obj.
-    name is for the name of class/ function etc. in the wanted module
-    obj is for the content itself
-    we return the configuration details of the class that inherit from class Config
-    and that its ENV_KEYWORD field is the same as env_keyword parameter
+"""
+Returns the the desired config class path.
 
-    Parameters:
-    env_keyword (str): the keyword that represent the wanted environment to be configured
+The function iterates through a dictionary returned by inspect.
+The dictionary contains details about all of the file members.
+Its key is the name of the member and value is obj which contains all the details about the member.
+The desired config path is being picked by the ENV_KEYWORD field defined in the config class.
 
-    Returns:
-    str: module_name.class_name, the position of the wanted configuration class
-    """
+Parameters:
+env_keyword (str): Should be equals to one of the config classes ENV_KEYWORD field.
+
+Returns:
+str: module_name.class_name, which is the full path of the config class.
+"""
 
     for name, obj in inspect.getmembers(sys.modules[__name__]):
         if inspect.isclass(Config) and obj.ENV_KEYWORD == env_keyword:
