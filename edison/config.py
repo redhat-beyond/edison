@@ -3,7 +3,6 @@ import sys
 
 
 def get_config_object(env_keyword: str):
-
 """
 Returns the the desired config class path.
 
