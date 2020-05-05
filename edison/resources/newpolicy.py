@@ -4,8 +4,6 @@ from edison import db, app
 import edison.models as models
 
 from flask_restful import Resource, reqparse
-from psycopg2.errors import UniqueViolation
-from sqlalchemy.exc import IntegrityError
 
 
 class NewPolicy(Resource):
@@ -13,7 +11,7 @@ class NewPolicy(Resource):
     # If one of the arguments not exists, client gets an error response.
     parser = reqparse.RequestParser()
     parser.add_argument(
-        'name',
+        'policy_name',
         type=str,
         required=True
     )
@@ -34,12 +32,15 @@ class NewPolicy(Resource):
     )
 
     @jwt_required
-    def post(self, username: str):
+    def post(self):
         data = NewPolicy.parser.parse_args()
         status = 200
         response = {}
+        username = get_jwt_identity()
+        # current_user = models.User.query.filter_by(username=username).first()
+        # filters = TODO - add filters by user id and policy name
 
-        if self.__request_is_legal(username):
+        if models.Policy.query.filter_by(policy_name=data['policy_name']).first() is None:
             try:
                 db.session.add(models.Policy(**data))
                 db.session.commit()
@@ -50,15 +51,9 @@ class NewPolicy(Resource):
                 response = {'msg': 'Update failed. Json missing keys.'}
                 status = 400
 
-            except IntegrityError as e:
-                status = 400
-                if isinstance(e.orig, UniqueViolation):
-                    response = {'msg': 'Policy name is taken.'}
-                else:
-                    response = {'msg': 'Unknown error.'}
         else:
-            status = 403
-            response = {'msg': 'User can only add policy to himself'}
+            status = 400
+            response = {'msg': f"User already have policy named {data['policy_name']}"}
 
         return response, status
 
