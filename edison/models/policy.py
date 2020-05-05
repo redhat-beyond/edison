@@ -7,7 +7,7 @@ class Policy(db.Model):
     _table_args_ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    policy_name = db.Column(db.String(50), nullable=False, unique=True)
     room = db.Column(db.String(50), nullable=False)
     conditions = db.Column(db.String(300), nullable=False)
     commands = db.Column(db.String(300), nullable=False)
