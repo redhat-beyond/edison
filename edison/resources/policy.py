@@ -32,12 +32,31 @@ class Policy(Resource):
         required=True
     )
 
-    def get(self, policy_name: str):
+    def get(self, policy_name: str, username: str):
         policy = models.Policy.query.filter_by(name=policy_name).first()
-
-        status = 200 if policy else 404
-        response = {
-                 policy: policy.to_json()
-        } if policy else {'msg': 'policy not found'}
+        # TODO - get the policy in name 'policy_name' of the user that asking for it
+        if policy:
+            status = 200
+            response = {'policy': policy.to_json()}
+        else:
+            status = 404
+            response = {'msg': f"user {username} doesnt have policy name {policy_name}"}
 
         return response, status
+
+    def delete(self, policy_name: str, username: str):
+        response = {'msg': 'Policy deleted'}
+        status = 200
+
+        if self.__request_is_legal(username):
+            db.session.delete(models.Policy.query.filter_by(name=policy_name).first())
+            db.session.commit()
+
+        else:
+            response = {'msg': 'Policy can be deleted just by the policy owner'}
+            status = 403
+
+        return response, status
+
+    def __request_is_legal(self, username: str):
+        return get_jwt_identity() == username
