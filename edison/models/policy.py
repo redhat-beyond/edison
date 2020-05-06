@@ -13,7 +13,7 @@ class Policy(db.Model):
     room = db.Column(db.String(50), nullable=False)
     conditions = db.Column(db.String(300), nullable=False)
     commands = db.Column(db.String(300), nullable=False)
-# user_id = db.column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def to_json(self):
         return {
@@ -26,5 +26,5 @@ class Policy(db.Model):
       #  return json.dumps(self, defualt=lambda obj: obj.__dict__, sort_keys=True, indent=4)
 
     def _repr_(self):
-        return f"<Policy: id = {self.name}, title = {self.title}, " \
-           f"sensors= {self.sensors}, username = {self.activationTime}, email = {self.status}>"
+        return f"<Policy: id = {self.policy_name}, title = {self.room}, " \
+           f"sensors= {self.conditions}, username = {self.commands}>"

@@ -11,7 +11,8 @@ class User(db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(150), nullable=False)
-    
+    policies = db.relationship('Policy', backref='author', lazy=True)
+
     def to_json(self):
         return {
             "username": self.username,
