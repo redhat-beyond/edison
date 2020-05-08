@@ -55,7 +55,7 @@ class NewPolicy(Resource):
 
         else:
             status = 400
-            response = {'msg': f"User already have policy named {data['policy_name']}"}
+            response = {'msg': f"User {username} already have policy named {data['policy_name']}"}
 
         return response, status
 
