@@ -37,12 +37,14 @@ class NewPolicy(Resource):
         status = 200
         response = {}
         username = get_jwt_identity()
-        # current_user = models.User.query.filter_by(username=username).first()
-        # filters = TODO - add filters by user id and policy name
+        current_user = models.User.query.filter_by(username=username).first()
+        policy_to_add = models.Policy(**data, user_id=current_user.id)
+        filters = {'policy_name': data['policy_name'], 'user_id': current_user.id}
 
-        if models.Policy.query.filter_by(policy_name=data['policy_name']).first() is None:
+        if models.Policy.query.filter_by(**filters).first() is None:
             try:
-                db.session.add(models.Policy(**data))
+                policy_to_add = models.Policy(**data, user_id=current_user.id)
+                db.session.add(policy_to_add)
                 db.session.commit()
 
                 response = {'msg': 'policy added successfully'}
