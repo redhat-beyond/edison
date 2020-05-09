@@ -1,16 +1,9 @@
 {% extends 'layout.html' %}
-
 {% block body %}
-
-
 <div class="policy">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Policy.css') }}">
-
   <div class="list-policies" id="Policieslist">
-    <div class="cantainer">
-
-
-      <!-- Button trigger modal -->
+    <div class="container">
       <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseAddPolicy" type="button"
         aria-expanded="false" aria-controls="collapseAddPolicy">
         Add Policy
@@ -24,22 +17,14 @@
             </div>
             <div class="form-group">
               <label for="choiseRoom">Room</label>
-              <select class="form-control" id="choiceRoom">
-                <option> </option>
-                <option>Living Room</option>
-                <option>Bad Room</option>
-                <option>kitchen</option>
-                <option>children room 1</option>
-                <option>children room 2</option>
-              </select>
+              <input type="text" class="form-control" id="choiceRoom" placeholder="Living Room">
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="light">Light</label>
                 <select class="form-control" id="light">
                   <option> </option>
-                  <option>
-                    On </option>
+                  <option> On </option>
                   <option>Off</option>
                 </select>
               </div>
@@ -47,8 +32,7 @@
                 <label for="ac">AC</label>
                 <select class="form-control" id="ac">
                   <option> </option>
-                  <option>
-                    On </option>
+                  <option>On </option>
                   <option>Off</option>
                 </select>
               </div>
@@ -56,8 +40,7 @@
                 <label for="shutters">Shutters</label>
                 <select class="form-control" id='shutters'>
                   <option> </option>
-                  <option>
-                    On </option>
+                  <option>On </option>
                   <option>Off</option>
                 </select>
               </div>
@@ -76,37 +59,33 @@
                 <div class="form-group col-md-5">
                   <label for="sensor">Sensor</label>
                   <select class="form-control" id="sensor">
-                    <option id='sensorOption0'> </option>
-                    <option id='sensorOption1'>
-                      Humidity </option>
-                    <option id='sensorOption2'>Light</option>
-                    <option id='sensorOption3'>Tempetrue</option>
+                    <option >Humidity </option>
+                    <option >Light</option>
+                    <option >Temperature</option>
                   </select>
                 </div>
                 <div class="form-group col-md-5">
                   <label for="condition">Condition</label>
                   <select class="form-control" id="condition">
-                    <option> </option>
-                    <option>
-                      < </option>
+                    <option>< </option>
                     <option>=</option>
                     <option>></option>
                     <option>Between</option>
                   </select>
                 </div>
               </div>
-              <div id='conditionTerm'>
+              <div id='ConditionTerm'>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-4" id="showValue" style="display:none;">
-                  <label id=lableValue for="value"></label>
+                <div class="form-group col-md-4 ConditionTerm" id="showValue">
+                  <label id=labelValue for="value"></label>
                   <input type="number" id="value" class="form-control" placeholder="30">
                 </div>
-                <div class="form-group col-md-4" id="showFrom" style="display:none;">
+                <div class="form-group col-md-4 ConditionTerm" id="showFrom">
                   <label for="from">From</label>
-                  <input type="number" id="from" class="form-control" placeholder="50">
+                  <input type="number" id="from" class="form-control" placeholder="30">
                 </div>
-                <div class="form-group col-md-4" id="showTo" style="display:none;">
+                <div class="form-group col-md-4 ConditionTerm" id="showTo">
                   <label for="to">To</label>
                   <input type="number" id="to" class="form-control" placeholder="50">
                 </div>
@@ -135,5 +114,4 @@
   </div>
   <script type="module" src="{{ url_for('static', filename='js/policy.controller.js') }}"></script>
 </div>
-
 {% endblock %}
