@@ -2,114 +2,108 @@
 {% block body %}
 <div class="policy">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Policy.css') }}">
-  <div class="list-policies" id="Policieslist">
-    <div class="container">
-      <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseAddPolicy" type="button"
-        aria-expanded="false" aria-controls="collapseAddPolicy">
-        Add Policy
-      </button>
-      <div class="collapse" id="collapseAddPolicy" style="width: 50rem;">
-        <div class="card card-body">
-          <form>
-            <div class="form-group">
-              <label for="PolicyName">Name</label>
-              <input type="text" class="form-control" id="PolicyName" placeholder="my policy">
+  <div class="container">
+    <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseAddPolicy" type="button"
+      aria-expanded="false" aria-controls="collapseAddPolicy">
+      Add Policy
+    </button>
+    <div class="collapse" id="collapseAddPolicy">
+      <div class="card card-body">
+        <form>
+          <div class="form-group">
+            <label for="policyName">Name</label>
+            <input type="text" class="form-control" id="policyName" placeholder="my policy">
+          </div>
+          <div class="form-group">
+            <label for="policyRoom">Room</label>
+            <input type="text" class="form-control" id="policyRoom" placeholder="Living Room">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="light">Light</label>
+              <select class="form-control" id="light">
+                <option> </option>
+                <option>On</option>
+                <option>Off</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label for="choiceRoom">Room</label>
-              <input type="text" class="form-control" id="choiceRoom" placeholder="Living Room">
+            <div class="form-group col-md-4">
+              <label for="airConditioner">AC</label>
+              <select class="form-control" id="airConditioner">
+                <option> </option>
+                <option>On</option>
+                <option>Off</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="shutters">Shutters</label>
+              <select class="form-control" id="shutters">
+                <option> </option>
+                <option>On</option>
+                <option>Off</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <button class="btn btn-link collapsed" id='addCondition' data-toggle="collapse"
+                data-target="#collapseAddCondition" type="button" aria-expanded="false"
+                aria-controls="collapseAddCondition">
+                Add Condition
+              </button>
+            </div>
+          </div>
+          <div class="collapse" id="collapseAddCondition">
+            <div class="form-row">
+              <div class="form-group col-md-5">
+                <label for="sensor">Sensor</label>
+                <select class="form-control" id="sensor">
+                  <option>Humidity</option>
+                  <option>Light</option>
+                  <option>Temperature</option>
+                </select>
+              </div>
+              <div class="form-group col-md-5">
+                <label for="chooseCondition">Condition</label>
+                <select class="form-control" id="chooseCondition">
+                  <option><</option>
+                  <option>=</option>
+                  <option>></option>
+                  <option>Between</option>
+                </select>
+              </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="light">Light</label>
-                <select class="form-control" id="light">
-                  <option> </option>
-                  <option>On</option>
-                  <option>Off</option>
-                </select>
+              <div class="form-group col-md-4 condition-term" id="showEqualOrUnderOrAbove">
+                <label id="labelEqualOrUnderOrAbove" for="equalOrUnderOrAbove"></label>
+                <input type="number" id="equalOrUnderOrAbove" class="form-control" placeholder="30">
               </div>
-              <div class="form-group col-md-4">
-                <label for="ac">AC</label>
-                <select class="form-control" id="ac">
-                  <option> </option>
-                  <option>On</option>
-                  <option>Off</option>
-                </select>
+              <div class="form-group col-md-4 condition-term" id="showFrom">
+                <label for="from">From</label>
+                <input type="number" id="from" class="form-control" placeholder="30">
               </div>
-              <div class="form-group col-md-4">
-                <label for="shutters">Shutters</label>
-                <select class="form-control" id='shutters'>
-                  <option> </option>
-                  <option>On</option>
-                  <option>Off</option>
-                </select>
+              <div class="form-group col-md-4 condition-term" id="showTo">
+                <label for="to">To</label>
+                <input type="number" id="to" class="form-control" placeholder="50">
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <button class="btn btn-link collapsed" id='addCondition' data-toggle="collapse"
-                  data-target="#collapseAddCondition" type="button" aria-expanded="false"
-                  aria-controls="collapseAddCondition">
-                  Add Condition
-                </button>
-              </div>
+            <button id='saveCondition' class="btn btn-info" data-toggle="collapse" data-target="#collapseAddCondition"
+              type="button" aria-expanded="false">
+              Save Condition
+          </div>
+          </button>
+          <button id='savePolicy' type="button" class="btn btn-outline-info" data-toggle="collapse"
+            data-target="#collapseAddPolicy" type="button" aria-expanded="false">Save Policy</button>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <p></p>
+              <label for="conditionNum">condition</label>
+              <select class="form-control" id="conditionNum">
+              </select>
             </div>
-            <div class="collapse" id="collapseAddCondition" style="width: 50rem;">
-              <div class="form-row">
-                <div class="form-group col-md-5">
-                  <label for="sensor">Sensor</label>
-                  <select class="form-control" id="sensor">
-                    <option>Humidity</option>
-                    <option>Light</option>
-                    <option>Temperature</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-5">
-                  <label for="condition">Condition</label>
-                  <select class="form-control" id="condition">
-                    <option><</option>
-                    <option>=</option>
-                    <option>></option>
-                    <option>Between</option>
-                  </select>
-                </div>
-              </div>
-              <div id='ConditionTerm'>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-4 condition-term" id="showValue">
-                  <label id=labelValue for="value"></label>
-                  <input type="number" id="value" class="form-control" placeholder="30">
-                </div>
-                <div class="form-group col-md-4 condition-term" id="showFrom">
-                  <label for="from">From</label>
-                  <input type="number" id="from" class="form-control" placeholder="30">
-                </div>
-                <div class="form-group col-md-4 condition-term" id="showTo">
-                  <label for="to">To</label>
-                  <input type="number" id="to" class="form-control" placeholder="50">
-                </div>
-              </div>
-              <button id='saveCondition' class="btn btn-info" data-toggle="collapse" data-target="#collapseAddCondition"
-                type="button" aria-expanded="false">
-                Save Condition
-            </div>
-            </button>
-            <p></p>
-            <button id='savePolicy' type="button" class="btn btn-outline-info" data-toggle="collapse"
-              data-target="#collapseAddPolicy" type="button" aria-expanded="false">Save Policy</button>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <p></p>
-                <label for="conditionNum">condition</label>
-                <select class="form-control" id="conditionNum">
-                </select>
-              </div>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-      <p></p>
     </div>
   </div>
   <script type="module" src="{{ url_for('static', filename='js/policy.controller.js') }}"></script>

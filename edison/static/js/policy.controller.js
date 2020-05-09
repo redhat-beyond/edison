@@ -5,46 +5,41 @@ import { PolicyElementsModifier } from './policyElementsModifier.js'
 var policy = new Policy();
 var countCondition = 0;
 
-function createInitElement(type, classSet = '', id = '', style = '') {
+function createInitElement(type, className = '', id = '') {
     var element = document.createElement(type);
 
-    if (classSet !== '') {
-        element.setAttribute("class", classSet);
+    if (className !== '') {
+        element.setAttribute("class", className);
     }
 
     if (id !== '') {
         element.setAttribute("id", id);
     }
-
-    if (style !== '') {
-        element.setAttribute("style", style);
-    }
-
     return element;
 }
 
 function setCondition() {
     var policyElementsModifier = new PolicyElementsModifier();
-    var conditionValue = document.getElementById('condition').value;
-    var value = document.getElementById('showValue');
+    var conditionValue = document.getElementById('chooseCondition').value;
+    var equalOrUnderOrAbove = document.getElementById('showEqualOrUnderOrAbove');
     var from = document.getElementById('showFrom');
     var to = document.getElementById('showTo');
-    var labelValue = document.getElementById('labelValue');
+    var labelEqualOrUnderOrAbove = document.getElementById('labelEqualOrUnderOrAbove');
 
-    policyElementsModifier.modify(conditionValue, from, to, labelValue, value);
+    policyElementsModifier.modify(conditionValue, from, to, labelEqualOrUnderOrAbove, equalOrUnderOrAbove);
 }
 
 function addCondition(policy) {
-    var conditionValue = document.getElementById('condition').value;
-    var condition = document.getElementById('sensor').value + ' ';
+    var conditionValue = document.getElementById('chooseCondition').value;
+    var sensor = document.getElementById('sensor').value + ' ';
 
-    condition = condition + conditionValue + ' ';
+    var condition = sensor + conditionValue + ' ';
 
     if (conditionValue === 'Between') {
         condition = condition + document.getElementById('from').value + ' ';
         condition = condition + document.getElementById('to').value;
     } else {
-        condition = condition + document.getElementById('value').value;
+        condition = condition + document.getElementById('equalOrUnderOrAbove').value;
     }
 
     policy.addCondition(condition);
@@ -52,20 +47,20 @@ function addCondition(policy) {
 
 function setCommand(policy) {
     var light = document.getElementById('light').value;
-    var ac = document.getElementById('ac').value;
+    var airConditioner = document.getElementById('airConditioner').value;
     var shutters = document.getElementById('shutters').value;
 
-    policy.addCommandToPolicy(ac, light, shutters);
+    policy.addCommandToPolicy(airConditioner, light, shutters);
 }
 
 function showCondition(policy, countCondition, elementID) {
     var element = document.getElementById(elementID);
-    var option = createInitElement('option', '', 'option' + countCondition);
+    var elementCurrCondition = createInitElement('option', '', 'option' + countCondition);
     var arrCondition = policy.condition.split(', ');
-    var sensorValue = arrCondition[countCondition];
+    var currCondition = arrCondition[countCondition];
 
-    option.innerHTML = countCondition + 1 + ': ' + sensorValue;
-    element.appendChild(option);
+    elementCurrCondition.innerHTML = countCondition + 1 + ': ' + currCondition;
+    element.appendChild(elementCurrCondition);
 }
 
 function initSettingToNewPolicy() {
@@ -81,10 +76,11 @@ function initSettingToNewPolicy() {
 }
 
 function addPolicy() {
-    policy.name = document.getElementById('PolicyName').value;
-    policy.room = document.getElementById('choiceRoom').value;
+    policy.name = document.getElementById('policyName').value;
+    policy.room = document.getElementById('policyRoom').value;
     setCommand(policy);
     $.post('/policy', policy, function () { });
+    console.log(policy)
     initSettingToNewPolicy();
 }
 
@@ -95,7 +91,7 @@ function saveCondition() {
 }
 
 function mainFunctionPolicy() {
-    document.getElementById('condition').addEventListener('click', setCondition);
+    document.getElementById('chooseCondition').addEventListener('click', setCondition);
     document.getElementById('saveCondition').addEventListener('click', saveCondition);
     document.getElementById('savePolicy').addEventListener('click', addPolicy);
 }

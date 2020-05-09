@@ -28,3 +28,7 @@
 .condition-term {
   display: none;
 }
+
+.card-body {
+  width: 42rem;
+}

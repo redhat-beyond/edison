@@ -22,17 +22,19 @@ export class Policy {
         this.condition = this.condition + add_condition;
     }
 
-    addCommandToPolicy(ac, light, shutters) {
+    addCommandToPolicy(airConditioner, light, shutters) {
+        var sensors = []; 
         if (light) {
-            this.command = this.command + 'light ' + light;
+            sensors.push('light ' + light);
         }
 
-        if (ac) {
-            this.command = this.command + ' ,ac ' + ac;
+        if (airConditioner) {
+            sensors.push('air conditioner ' + airConditioner);;
         }
 
         if (shutters) {
-            this.command = this.command + ',shutters ' + shutters;
+            sensors.push('shutters ' + shutters);
         }
+        this.command = sensors.join(' ,');
     }
 }

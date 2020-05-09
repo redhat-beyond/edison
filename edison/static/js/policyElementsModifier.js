@@ -4,21 +4,21 @@ export class PolicyElementsModifier {
 
     constructor() {
         this.#configByCondition = {
-            '=': { displayTo: 'none', displayFrom: 'none', labelValue: 'Equal', displayValue: 'inline' },
-            '<': { displayTo: 'none', displayFrom: 'none', labelValue: 'Under', displayValue: 'inline' },
-            '>': { displayTo: 'none', displayFrom: 'none', labelValue: 'Above', displayValue: 'inline' },
-            'Between': { displayTo: 'inline', displayFrom: 'inline', labelValue: '', displayValue: 'none' }
+            '=': { displayTo: 'none', displayFrom: 'none', labelEqualOrUnderOrAbove: 'Equal', displayEqualOrUnderOrAbove: 'inline' },
+            '<': { displayTo: 'none', displayFrom: 'none', labelEqualOrUnderOrAbove: 'Under', displayEqualOrUnderOrAbove: 'inline' },
+            '>': { displayTo: 'none', displayFrom: 'none', labelEqualOrUnderOrAbove: 'Above', displayEqualOrUnderOrAbove: 'inline' },
+            'Between': { displayTo: 'inline', displayFrom: 'inline', labelEqualOrUnderOrAbove: '', displayEqualOrUnderOrAbove: 'none' }
         }
     }
 
-    modify(condition, from, to, labelValue, value) {
+    modify(condition, from, to, labelEqualOrUnderOrAbove, equalOrUnderOrAbove) {
         if (this.#configByCondition.hasOwnProperty(condition)) {
             var config = this.#configByCondition[condition];
             
             to.style.display = config.displayTo;
             from.style.display = config.displayFrom;
-            value.style.display = config.displayValue;
-            labelValue.innerHTML = config.labelValue;
+            equalOrUnderOrAbove.style.display = config.displayEqualOrUnderOrAbove;
+            labelEqualOrUnderOrAbove.innerHTML = config.labelEqualOrUnderOrAbove;
         }
     }
 }
