@@ -14,6 +14,7 @@ export class PolicyElementsModifier {
     modify(condition, from, to, labelValue, value) {
         if (this.#configByCondition.hasOwnProperty(condition)) {
             var config = this.#configByCondition[condition];
+            
             to.style.display = config.displayTo;
             from.style.display = config.displayFrom;
             value.style.display = config.displayValue;

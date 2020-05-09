@@ -15,9 +15,10 @@ export class Policy {
     }
 
     addCondition(add_condition) {
-        if (this.condition != '') {
+        if (this.condition !== '') {
             this.condition = this.condition + ', ';
         }
+
         this.condition = this.condition + add_condition;
     }
 
@@ -25,9 +26,11 @@ export class Policy {
         if (light) {
             this.command = this.command + 'light ' + light;
         }
+
         if (ac) {
             this.command = this.command + ' ,ac ' + ac;
         }
+
         if (shutters) {
             this.command = this.command + ',shutters ' + shutters;
         }

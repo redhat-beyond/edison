@@ -1,30 +1,30 @@
 .policy {
-        padding: .4em;
-        top: 5rem;
-        position: fixed;
+  padding: 0.4em;
+  top: 5rem;
+  position: fixed;
 }
 
 .active {
-        font-size: 120%;
+  font-size: 120%;
 }
 
 .card-header {
-        font-size: 100%;
+  font-size: 100%;
 }
 
 .btn-link {
-        font-size: 120%;
+  font-size: 120%;
 }
 
 .btn {
-        font-size: 120%;
-        margin: 1rem;
+  font-size: 120%;
+  margin: 1rem;
 }
 
 .modal-body {
-        font-size: 120%;
+  font-size: 120%;
 }
 
-.ConditionTerm {
-        display: none;
+.condition-term {
+  display: none;
 }
