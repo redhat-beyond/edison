@@ -80,7 +80,6 @@ function addPolicy() {
     policy.room = document.getElementById('policyRoom').value;
     setCommand(policy);
     $.post('/policy', policy, function () { });
-    console.log(policy)
     initSettingToNewPolicy();
 }
 
