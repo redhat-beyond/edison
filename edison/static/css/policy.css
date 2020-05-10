@@ -14,6 +14,7 @@
 
 .btn-link {
   font-size: 120%;
+  height: 1.6rem;
 }
 
 .btn {
@@ -29,6 +30,6 @@
   display: none;
 }
 
-.card-body {
-  width: 42rem;
+.card{
+  width: 50rem;
 }

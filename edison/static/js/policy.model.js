@@ -1,10 +1,9 @@
-
 export class Policy {
-    constructor() {
-        this.name = '';
-        this.room = '';
-        this.command = '';
-        this.condition = '';
+    constructor(name = '',room = '',command = '',condition = '') {
+        this.name = name;
+        this.room = room;
+        this.command = command;
+        this.condition = condition;
     }
 
     reset() {

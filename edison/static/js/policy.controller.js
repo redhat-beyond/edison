@@ -4,6 +4,57 @@ import { PolicyElementsModifier } from './policyElementsModifier.js'
 
 var policy = new Policy();
 var countCondition = 0;
+var json_arr_demo = [];
+var policyTest1 = new Policy('Test Policy One', 'living room', 'light On, shutters Off', 'humidity < 40, tempetrue < 25');
+var policyTest2 = new Policy('Test Policy Two', 'kichen', 'shutters Off', 'humidity > 80, tempetrue between 30 50');
+json_arr_demo.push(policyTest1);
+json_arr_demo.push(policyTest2);
+
+function setCardBody(policy) {
+    var cardBody = createInitElement('div', 'card-body');
+    var cardTitle = createInitElement('h5', 'card_title');
+    var cardText = createInitElement('h5');
+    
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardText);
+    cardText.innerHTML = "this policy is setting to the " + policy.room + " and the policy do " + policy.command + ' with these conditions: ' + policy.condition;
+    return cardBody;
+}
+
+function createCard(policyNum, policy) {
+    var card = createInitElement('div', 'card');
+    var cardHeader = createInitElement('div', 'card-header');
+    var hFive = createInitElement('h5', 'mb-0');
+    var buttonCradHead = createInitElement('button', 'btn btn-link');
+
+    card.appendChild(cardHeader);
+    cardHeader.appendChild(hFive);
+    buttonCradHead.setAttribute("data-toggle", "collapse");
+    buttonCradHead.setAttribute("data-target", "#collapsePolicy" + policyNum);
+    buttonCradHead.setAttribute("aria-expanded", "true");
+    buttonCradHead.setAttribute("aria-controls", "collapsePolicy" + policyNum);
+    buttonCradHead.innerHTML = policy.name;
+    hFive.appendChild(buttonCradHead);
+    return card;
+}
+
+function showPolicies() {
+    $.get('/policy','json');
+    var len = json_arr_demo.length;
+    var showPolicies = document.getElementById('showPolicies');
+
+    for (var i = 0; i < len; i++) {
+        var card = createCard(i, json_arr_demo[i]);
+        var collapseClassPolicy = createInitElement("div", "collapse", "collapsePolicy" + i);
+        var cardBody = setCardBody(json_arr_demo[i]);
+
+        collapseClassPolicy.setAttribute("aria-labelledby", "headPolicy" + i);
+        collapseClassPolicy.setAttribute("data-parent", "#showPolicies");
+        showPolicies.appendChild(card);
+        card.appendChild(collapseClassPolicy);
+        collapseClassPolicy.appendChild(cardBody);
+    }
+}
 
 function createInitElement(type, className = '', id = '') {
     var element = document.createElement(type);
@@ -97,4 +148,5 @@ function mainFunctionPolicy() {
 
 $(function () {
     mainFunctionPolicy();
+    showPolicies();
 });

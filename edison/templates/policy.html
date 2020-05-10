@@ -2,6 +2,7 @@
 {% block body %}
 <div class="policy">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Policy.css') }}">
+
   <div class="container">
     <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseAddPolicy" type="button"
       aria-expanded="false" aria-controls="collapseAddPolicy">
@@ -104,6 +105,8 @@
           </div>
         </form>
       </div>
+    </div>
+    <div id = "showPolicies">
     </div>
   </div>
   <script type="module" src="{{ url_for('static', filename='js/policy.controller.js') }}"></script>
