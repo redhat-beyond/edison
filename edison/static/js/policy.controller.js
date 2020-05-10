@@ -4,6 +4,7 @@ import { PolicyElementsModifier } from './policyElementsModifier.js'
 
 var policy = new Policy();
 var countCondition = 0;
+
 var policiesExamples = [];
 var policyTest1 = new Policy('Test Policy One', 'living room', 'light On, shutters Off', 'humidity < 40, tempetrue < 25');
 var policyTest2 = new Policy('Test Policy Two', 'kichen', 'shutters Off', 'humidity > 80, tempetrue between 30 50');
@@ -19,23 +20,25 @@ function setCardBody(policy) {
     cardBody.appendChild(cardText);
     cardText.innerHTML = `this policy is setting to the ${policy.room} and the policy do ${policy.command}
     with these conditions: ${policy.condition}`;
+
     return cardBody;
 }
 
 function createCard(policyNum, policy) {
     var card = createInitElement('div', 'card');
     var headerCard = createInitElement('div', 'card-header');
-    var sizeButtonCard = createInitElement('h5', 'mb-0');
-    var buttonCardHead = createInitElement('button', 'btn btn-link');
+    var buttonTextSize = createInitElement('h5', 'mb-0');
+    var headerCardButton = createInitElement('button', 'btn btn-link');
 
     card.appendChild(headerCard);
-    headerCard.appendChild(sizeButtonCard);
-    buttonCardHead.setAttribute("data-toggle", "collapse");
-    buttonCardHead.setAttribute("data-target", "#collapse-policy" + policyNum);
-    buttonCardHead.setAttribute("aria-expanded", "true");
-    buttonCardHead.setAttribute("aria-controls", "collapse-policy" + policyNum);
-    buttonCardHead.innerHTML = policy.name;
-    sizeButtonCard.appendChild(buttonCardHead);
+    headerCard.appendChild(buttonTextSize);
+    headerCardButton.setAttribute("data-toggle", "collapse");
+    headerCardButton.setAttribute("data-target", "#collapse-policy" + policyNum);
+    headerCardButton.setAttribute("aria-expanded", "true");
+    headerCardButton.setAttribute("aria-controls", "collapse-policy" + policyNum);
+    headerCardButton.innerHTML = policy.name;
+    buttonTextSize.appendChild(headerCardButton);
+
     return card;
 }
 
