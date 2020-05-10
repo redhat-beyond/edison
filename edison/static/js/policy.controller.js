@@ -134,7 +134,8 @@ function addPolicy() {
     policy.name = document.getElementById('policy-name').value;
     policy.room = document.getElementById('policy-room').value;
     setCommand(policy);
-    $.post('/policy', policy, function () { });
+    //this function will be enable when the route wiil be ready
+    //$.post('/policy', policy, function(){ });
     initSettingToNewPolicy();
 }
 
