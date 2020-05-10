@@ -11,9 +11,13 @@ db = edison.db
 # More about database migrations can be found in /edison/migrations/README.
 db.create_all()
 
+@app.route("/policy")
+def policy():
+	return render_template('policy.html')
+
 @app.route("/")
-def index():
-	return render_template('index.html')
+def home():
+	return render_template('home.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

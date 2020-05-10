@@ -1,21 +1,27 @@
-import secrets
-import importlib, inspect
-import sys, inspect
+import inspect
+import sys
 
-config_dict = {}
 
-# If config_dict is empty this function builds it dynamically 
-# and returns the appropriate config object path.
 def get_config_object(env_keyword: str):
-    if(len(config_dict) == 0):
-        # Iterating through all config.py members
-        for name, obj in inspect.getmembers(sys.modules[__name__]):
-            # We're interested only with the derived classes of the Config class
-            if inspect.isclass(obj) and name != "Config":
-                config_dict[obj.ENV_KEYWORD] = ".".join([obj.__module__, name])
-    
-    return config_dict[env_keyword]
-    
+    """
+    Returns the the desired config class path.
+
+    The function iterates through a dictionary returned by inspect.
+    The dictionary contains details about all of the file members.
+    Its key is the name of the member and value is obj which contains all the details about the member.
+    The desired config path is being picked by the ENV_KEYWORD field defined in the config class.
+
+    Parameters:
+    env_keyword (str): Should be equals to one of the config classes ENV_KEYWORD field.
+
+    Returns:
+    str: module_name.class_name, which is the full path of the config class.
+    """
+    for name, obj in inspect.getmembers(sys.modules[__name__]):
+        if issubclass(obj, Config) and obj.ENV_KEYWORD == env_keyword:
+            return ".".join([obj.__module__, name])
+
+
 class Config:
     ENV_KEYWORD = ""
     DEBUG = False
@@ -26,6 +32,7 @@ class Config:
 # PostgreSQL connection string should be updated once an actual production environment is established.
 class ProductionConfig(Config):
     ENV_KEYWORD = "production"
+
 
 class DevelopmentConfig(Config):
     ENV_KEYWORD = "development"
