@@ -111,7 +111,7 @@ function showCondition(policy, countCondition, elementID) {
     var arrCondition = policy.condition.split(', ');
     var currCondition = arrCondition[countCondition];
 
-    elementCurrCondition.innerHTML = countCondition + 1 + ': ' + currCondition;
+    elementCurrCondition.innerHTML = `${countCondition + 1}: ${currCondition} `;
     element.appendChild(elementCurrCondition);
 }
 
