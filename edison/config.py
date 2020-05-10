@@ -18,7 +18,7 @@ def get_config_object(env_keyword: str):
     str: module_name.class_name, which is the full path of the config class.
     """
     for name, obj in inspect.getmembers(sys.modules[__name__]):
-        if inspect.isclass(Config) and obj.ENV_KEYWORD == env_keyword:
+        if issubclass(obj, Config) and obj.ENV_KEYWORD == env_keyword:
             return ".".join([obj.__module__, name])
 
 
