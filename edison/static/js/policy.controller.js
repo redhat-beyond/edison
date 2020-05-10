@@ -4,52 +4,53 @@ import { PolicyElementsModifier } from './policyElementsModifier.js'
 
 var policy = new Policy();
 var countCondition = 0;
-var json_arr_demo = [];
+var policiesExamples = [];
 var policyTest1 = new Policy('Test Policy One', 'living room', 'light On, shutters Off', 'humidity < 40, tempetrue < 25');
 var policyTest2 = new Policy('Test Policy Two', 'kichen', 'shutters Off', 'humidity > 80, tempetrue between 30 50');
-json_arr_demo.push(policyTest1);
-json_arr_demo.push(policyTest2);
+policiesExamples.push(policyTest1);
+policiesExamples.push(policyTest2);
 
 function setCardBody(policy) {
     var cardBody = createInitElement('div', 'card-body');
     var cardTitle = createInitElement('h5', 'card_title');
     var cardText = createInitElement('h5');
-    
+
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
-    cardText.innerHTML = "this policy is setting to the " + policy.room + " and the policy do " + policy.command + ' with these conditions: ' + policy.condition;
+    cardText.innerHTML = `this policy is setting to the ${policy.room} and the policy do ${policy.command}
+    with these conditions: ${policy.condition}`;
     return cardBody;
 }
 
 function createCard(policyNum, policy) {
     var card = createInitElement('div', 'card');
-    var cardHeader = createInitElement('div', 'card-header');
-    var hFive = createInitElement('h5', 'mb-0');
-    var buttonCradHead = createInitElement('button', 'btn btn-link');
+    var headerCard = createInitElement('div', 'card-header');
+    var sizeButtonCard = createInitElement('h5', 'mb-0');
+    var buttonCardHead = createInitElement('button', 'btn btn-link');
 
-    card.appendChild(cardHeader);
-    cardHeader.appendChild(hFive);
-    buttonCradHead.setAttribute("data-toggle", "collapse");
-    buttonCradHead.setAttribute("data-target", "#collapsePolicy" + policyNum);
-    buttonCradHead.setAttribute("aria-expanded", "true");
-    buttonCradHead.setAttribute("aria-controls", "collapsePolicy" + policyNum);
-    buttonCradHead.innerHTML = policy.name;
-    hFive.appendChild(buttonCradHead);
+    card.appendChild(headerCard);
+    headerCard.appendChild(sizeButtonCard);
+    buttonCardHead.setAttribute("data-toggle", "collapse");
+    buttonCardHead.setAttribute("data-target", "#collapse-policy" + policyNum);
+    buttonCardHead.setAttribute("aria-expanded", "true");
+    buttonCardHead.setAttribute("aria-controls", "collapse-policy" + policyNum);
+    buttonCardHead.innerHTML = policy.name;
+    sizeButtonCard.appendChild(buttonCardHead);
     return card;
 }
 
 function showPolicies() {
-    $.get('/policy','json');
-    var len = json_arr_demo.length;
-    var showPolicies = document.getElementById('showPolicies');
+    //once the route will be ready this function will be modifiy to get the policies from the backend and convert them to array 
+    var len = policiesExamples.length;
+    var showPolicies = document.getElementById('show-policies');
 
     for (var i = 0; i < len; i++) {
-        var card = createCard(i, json_arr_demo[i]);
-        var collapseClassPolicy = createInitElement("div", "collapse", "collapsePolicy" + i);
-        var cardBody = setCardBody(json_arr_demo[i]);
+        var card = createCard(i, policiesExamples[i]);
+        var collapseClassPolicy = createInitElement("div", "collapse", "collapse-policy" + i);
+        var cardBody = setCardBody(policiesExamples[i]);
 
-        collapseClassPolicy.setAttribute("aria-labelledby", "headPolicy" + i);
-        collapseClassPolicy.setAttribute("data-parent", "#showPolicies");
+        collapseClassPolicy.setAttribute("aria-labelledby", "head-policy" + i);
+        collapseClassPolicy.setAttribute("data-parent", "#show-policies");
         showPolicies.appendChild(card);
         card.appendChild(collapseClassPolicy);
         collapseClassPolicy.appendChild(cardBody);
@@ -71,17 +72,17 @@ function createInitElement(type, className = '', id = '') {
 
 function setCondition() {
     var policyElementsModifier = new PolicyElementsModifier();
-    var conditionValue = document.getElementById('chooseCondition').value;
-    var equalOrUnderOrAbove = document.getElementById('showEqualOrUnderOrAbove');
-    var from = document.getElementById('showFrom');
-    var to = document.getElementById('showTo');
-    var labelEqualOrUnderOrAbove = document.getElementById('labelEqualOrUnderOrAbove');
+    var conditionValue = document.getElementById('choose-condition').value;
+    var equalOrUnderOrAbove = document.getElementById('show-equal-under-above');
+    var from = document.getElementById('show-from');
+    var to = document.getElementById('show-to');
+    var labelEqualOrUnderOrAbove = document.getElementById('label-equal-under-above');
 
     policyElementsModifier.modify(conditionValue, from, to, labelEqualOrUnderOrAbove, equalOrUnderOrAbove);
 }
 
 function addCondition(policy) {
-    var conditionValue = document.getElementById('chooseCondition').value;
+    var conditionValue = document.getElementById('choose-condition').value;
     var sensor = document.getElementById('sensor').value + ' ';
 
     var condition = sensor + conditionValue + ' ';
@@ -90,7 +91,7 @@ function addCondition(policy) {
         condition = condition + document.getElementById('from').value + ' ';
         condition = condition + document.getElementById('to').value;
     } else {
-        condition = condition + document.getElementById('equalOrUnderOrAbove').value;
+        condition = condition + document.getElementById('equal-under-above').value;
     }
 
     policy.addCondition(condition);
@@ -98,7 +99,7 @@ function addCondition(policy) {
 
 function setCommand(policy) {
     var light = document.getElementById('light').value;
-    var airConditioner = document.getElementById('airConditioner').value;
+    var airConditioner = document.getElementById('air-conditioner').value;
     var shutters = document.getElementById('shutters').value;
 
     policy.addCommandToPolicy(airConditioner, light, shutters);
@@ -127,8 +128,8 @@ function initSettingToNewPolicy() {
 }
 
 function addPolicy() {
-    policy.name = document.getElementById('policyName').value;
-    policy.room = document.getElementById('policyRoom').value;
+    policy.name = document.getElementById('policy-name').value;
+    policy.room = document.getElementById('policy-room').value;
     setCommand(policy);
     $.post('/policy', policy, function () { });
     initSettingToNewPolicy();
@@ -136,14 +137,14 @@ function addPolicy() {
 
 function saveCondition() {
     addCondition(policy);
-    showCondition(policy, countCondition, 'conditionNum');
+    showCondition(policy, countCondition, 'condition-list');
     countCondition++;
 }
 
 function mainFunctionPolicy() {
-    document.getElementById('chooseCondition').addEventListener('click', setCondition);
-    document.getElementById('saveCondition').addEventListener('click', saveCondition);
-    document.getElementById('savePolicy').addEventListener('click', addPolicy);
+    document.getElementById('choose-condition').addEventListener('click', setCondition);
+    document.getElementById('save-condition').addEventListener('click', saveCondition);
+    document.getElementById('save-policy').addEventListener('click', addPolicy);
 }
 
 $(function () {
