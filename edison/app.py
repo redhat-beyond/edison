@@ -5,6 +5,10 @@ from flask import render_template
 
 app = edison.app
 
+@app.route("/policy")
+def policy():
+	return render_template('policy.html')
+
 @app.route("/")
 def home():
 	return render_template('home.html')
