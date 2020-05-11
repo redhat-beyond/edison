@@ -5,7 +5,6 @@ import { PoliciesExampleArray } from './policiesExampleArray.js'
 
 var policy = new Policy();
 var countCondition = 0;
-var policiesExamples = new PoliciesExampleArray();
 
 function setCardBody(policy) {
     var cardBody = createInitElement('div', 'card-body');
@@ -20,7 +19,7 @@ function setCardBody(policy) {
     return cardBody;
 }
 
-function createCard(policyNum, policy) {
+function createCard(policy) {
     var card = createInitElement('div', 'card');
     var headerCard = createInitElement('div', 'card-header');
     var buttonTextSize = createInitElement('h5', 'mb-0');
@@ -29,26 +28,39 @@ function createCard(policyNum, policy) {
     card.appendChild(headerCard);
     headerCard.appendChild(buttonTextSize);
     headerCardButton.setAttribute("data-toggle", "collapse");
-    headerCardButton.setAttribute("data-target", "#collapse-policy" + policyNum);
+    headerCardButton.setAttribute("data-target", `#collapse-policy${policy.id}`);
     headerCardButton.setAttribute("aria-expanded", "true");
-    headerCardButton.setAttribute("aria-controls", "collapse-policy" + policyNum);
+    headerCardButton.setAttribute("aria-controls", `collapse-policy${policy.id}`);
     headerCardButton.innerHTML = policy.name;
     buttonTextSize.appendChild(headerCardButton);
 
     return card;
 }
 
-function showPolicies() {
+function getFromBackend() {
     //once the route will be ready this function will be modifiy to get the policies from the backend and convert them to array 
-    var len = policiesExamples.examples.length;
+    var jsonPolicyExample = new PoliciesExampleArray().jsonPolicesExample;
+    var policiesArray = [];
+
+    for (var i in jsonPolicyExample) {
+        var newPolicy = new Policy(jsonPolicyExample[i].name, jsonPolicyExample[i].room, jsonPolicyExample[i].command, jsonPolicyExample[i].condition, jsonPolicyExample[i].id)
+        policiesArray.push(newPolicy);
+    }
+    
+    return policiesArray;
+}
+
+function showPolicies() {
+    var policiesArray = getFromBackend();
+    var len = policiesArray.length;
     var showPolicies = document.getElementById('show-policies');
     for (var i = 0; i < len; i++) {
-        var card = createCard(i, policiesExamples.examples[i]);
-        var collapseClassPolicy = createInitElement("div", "collapse", "collapse-policy" + i);
-        var cardBody = setCardBody(policiesExamples.examples[i]);
+        var card = createCard(policiesArray[i]);
+        var collapseClassPolicy = createInitElement('div', 'collapse', `collapse-policy${policiesArray[i].id}`);
+        var cardBody = setCardBody(policiesArray[i]);
 
-        collapseClassPolicy.setAttribute("aria-labelledby", "head-policy" + i);
-        collapseClassPolicy.setAttribute("data-parent", "#show-policies");
+        collapseClassPolicy.setAttribute('aria-labelledby', `head-policy${policiesArray[i].id}`);
+        collapseClassPolicy.setAttribute('data-parent', '#show-policies');
         showPolicies.appendChild(card);
         card.appendChild(collapseClassPolicy);
         collapseClassPolicy.appendChild(cardBody);
@@ -81,15 +93,15 @@ function setCondition() {
 
 function addCondition(policy) {
     var conditionValue = document.getElementById('choose-condition').value;
-    var sensor = document.getElementById('sensor').value + ' ';
+    var sensor = `${document.getElementById('sensor').value} `;
 
-    var condition = sensor + conditionValue + ' ';
+    var condition = `${sensor + conditionValue} `;
 
     if (conditionValue === 'Between') {
-        condition = condition + document.getElementById('from').value + ' ';
-        condition = condition + document.getElementById('to').value;
+        condition = `${condition + document.getElementById('from').value} `;
+        condition = `${condition + document.getElementById('to').value}`;
     } else {
-        condition = condition + document.getElementById('equal-under-above').value;
+        condition = `${condition + document.getElementById('equal-under-above').value}`;
     }
 
     policy.addCondition(condition);
@@ -105,7 +117,7 @@ function setCommand(policy) {
 
 function showCondition(policy, countCondition, elementID) {
     var element = document.getElementById(elementID);
-    var elementCurrCondition = createInitElement('option', '', 'option' + countCondition);
+    var elementCurrCondition = createInitElement('option', '', `option${countCondition}`);
     var arrCondition = policy.condition.split(', ');
     var currCondition = arrCondition[countCondition];
 
@@ -117,11 +129,11 @@ function initSettingToNewPolicy() {
     policy.reset();
 
     for (var i = 0; i < countCondition; i++) {
-        var element = document.getElementById('option' + i);
+        var element = document.getElementById(`option${i}`);
 
         element.remove();
     }
-   
+
     countCondition = 0;
 }
 

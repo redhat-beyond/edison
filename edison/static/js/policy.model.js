@@ -1,18 +1,25 @@
 export class Policy {
-    constructor(name = '', room = '', command = '', condition = '') {
+    constructor(name = '', room = '', command = '', condition = '',id = '') {
+        this.id = id;
         this.name = name;
         this.room = room;
         this.command = command;
         this.condition = condition;
-        this.countCondition = 0;
     }
 
+    /*constructor(name = '', room = '', command = '', condition = '') {
+        this.name = name;
+        this.room = room;
+        this.command = command;
+        this.condition = condition;
+    }*/
+
     reset() {
+        this.id = '';
         this.name = '';
         this.room = '';
         this.command = '';
         this.condition = '';
-        this.countCondition = 0;
     }
 
     addCondition(add_condition) {
