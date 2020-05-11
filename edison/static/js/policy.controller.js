@@ -1,15 +1,11 @@
 
 import { Policy } from './policy.model.js'
 import { PolicyElementsModifier } from './policyElementsModifier.js'
+import { PoliciesExampleArray } from './policiesExampleArray.js'
 
 var policy = new Policy();
 var countCondition = 0;
-
-var policiesExamples = [];
-var policyTest1 = new Policy('Test Policy One', 'living room', 'light On, shutters Off', 'humidity < 40, tempetrue < 25');
-var policyTest2 = new Policy('Test Policy Two', 'kichen', 'shutters Off', 'humidity > 80, tempetrue between 30 50');
-policiesExamples.push(policyTest1);
-policiesExamples.push(policyTest2);
+var policiesExamples = new PoliciesExampleArray();
 
 function setCardBody(policy) {
     var cardBody = createInitElement('div', 'card-body');
@@ -18,7 +14,7 @@ function setCardBody(policy) {
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
-    cardText.innerHTML = `this policy is setting to the ${policy.room} and the policy do ${policy.command}
+    cardText.innerHTML = `This policy is associated with ${policy.room} room and responsible for ${policy.command}
     with these conditions: ${policy.condition}`;
 
     return cardBody;
@@ -44,13 +40,12 @@ function createCard(policyNum, policy) {
 
 function showPolicies() {
     //once the route will be ready this function will be modifiy to get the policies from the backend and convert them to array 
-    var len = policiesExamples.length;
+    var len = policiesExamples.examples.length;
     var showPolicies = document.getElementById('show-policies');
-
     for (var i = 0; i < len; i++) {
-        var card = createCard(i, policiesExamples[i]);
+        var card = createCard(i, policiesExamples.examples[i]);
         var collapseClassPolicy = createInitElement("div", "collapse", "collapse-policy" + i);
-        var cardBody = setCardBody(policiesExamples[i]);
+        var cardBody = setCardBody(policiesExamples.examples[i]);
 
         collapseClassPolicy.setAttribute("aria-labelledby", "head-policy" + i);
         collapseClassPolicy.setAttribute("data-parent", "#show-policies");
@@ -126,7 +121,7 @@ function initSettingToNewPolicy() {
 
         element.remove();
     }
-
+   
     countCondition = 0;
 }
 

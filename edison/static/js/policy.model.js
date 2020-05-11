@@ -1,9 +1,10 @@
 export class Policy {
-    constructor(name = '',room = '',command = '',condition = '') {
+    constructor(name = '', room = '', command = '', condition = '') {
         this.name = name;
         this.room = room;
         this.command = command;
         this.condition = condition;
+        this.countCondition = 0;
     }
 
     reset() {
@@ -11,6 +12,7 @@ export class Policy {
         this.room = '';
         this.command = '';
         this.condition = '';
+        this.countCondition = 0;
     }
 
     addCondition(add_condition) {
@@ -22,7 +24,7 @@ export class Policy {
     }
 
     addCommandToPolicy(airConditioner, light, shutters) {
-        var sensors = []; 
+        var sensors = [];
         if (light) {
             sensors.push('light ' + light);
         }
