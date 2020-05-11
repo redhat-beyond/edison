@@ -1,13 +1,21 @@
-
 export class Policy {
-    constructor() {
-        this.name = '';
-        this.room = '';
-        this.command = '';
-        this.condition = '';
+    constructor(name = '', room = '', command = '', condition = '',id = '') {
+        this.id = id;
+        this.name = name;
+        this.room = room;
+        this.command = command;
+        this.condition = condition;
     }
 
+    /*constructor(name = '', room = '', command = '', condition = '') {
+        this.name = name;
+        this.room = room;
+        this.command = command;
+        this.condition = condition;
+    }*/
+
     reset() {
+        this.id = '';
         this.name = '';
         this.room = '';
         this.command = '';
@@ -23,7 +31,7 @@ export class Policy {
     }
 
     addCommandToPolicy(airConditioner, light, shutters) {
-        var sensors = []; 
+        var sensors = [];
         if (light) {
             sensors.push('light ' + light);
         }
