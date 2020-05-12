@@ -7,7 +7,6 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 
-
 # API description in swagger - https://app.swaggerhub.com/apis/DoRTaL94/UserManagment/1.0.0
 
 app = edison.app
@@ -45,6 +44,7 @@ api.add_resource(LogoutRefresh, '/logout/refresh')
 api.add_resource(TokenRefresh, '/token-refresh')
 api.add_resource(NewPolicy, '/NewPolicy')
 api.add_resource(Policy, '/Policy/<string:policy_name>')
+api.add_resource(Policies, '/Policies')
 
 
 @app.route("/")

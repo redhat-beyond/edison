@@ -1,4 +1,5 @@
 from edison import db
+from edison.models import *
 
 
 class User(db.Model):
