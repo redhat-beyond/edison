@@ -40,7 +40,7 @@ class Policy(Resource):
 
         if policy is not None:
             status = 200
-            response = {'msg': policy.to_json()}
+            response = {'policy': policy.to_json()}
         else:
             status = 404
             response = {'msg': f"User {current_user.username} does'nt have policy name {policy_name}"}
