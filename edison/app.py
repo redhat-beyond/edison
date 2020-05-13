@@ -1,4 +1,5 @@
 import edison
+import edison.models
 
 from flask import render_template
 
