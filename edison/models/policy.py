@@ -1,4 +1,5 @@
 from edison import db
+from flask_restful import reqparse
 
 
 class Policy(db.Model):
@@ -24,3 +25,32 @@ class Policy(db.Model):
     def __repr__(self):
         return f"<Policy: id = {self.policy_name}, title = {self.room}, " \
            f"sensors= {self.conditions}, username = {self.commands}>"
+
+    @staticmethod
+    def create_parser():
+        # RequestParser enforces arguments in requests.
+        # If one of the arguments not exists, client gets an error response.
+        parser = reqparse.RequestParser()
+        parser.add_argument(
+            'policy_name',
+            type=str,
+            required=True
+        )
+        parser.add_argument(
+            'room',
+            type=str,
+            required=True
+        )
+        parser.add_argument(
+            'conditions',
+            type=str,
+            required=True
+        )
+        parser.add_argument(
+            'commands',
+            type=str,
+            required=True
+        )
+
+        return parser
+

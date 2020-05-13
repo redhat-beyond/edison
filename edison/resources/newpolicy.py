@@ -7,29 +7,8 @@ from flask_restful import Resource, reqparse
 
 
 class NewPolicy(Resource):
-    # RequestParser enforces arguments in requests.
-    # If one of the arguments not exists, client gets an error response.
-    parser = reqparse.RequestParser()
-    parser.add_argument(
-        'policy_name',
-        type=str,
-        required=True
-    )
-    parser.add_argument(
-        'room',
-        type=str,
-        required=True
-    )
-    parser.add_argument(
-        'conditions',
-        type=str,
-        required=True
-    )
-    parser.add_argument(
-        'commands',
-        type=str,
-        required=True
-    )
+
+    parser = models.Policy.create_parser()
 
     @jwt_required
     def post(self):
@@ -59,5 +38,3 @@ class NewPolicy(Resource):
 
         return response, status
 
-    def __request_is_legal(self, username: str):
-        return get_jwt_identity() == username
