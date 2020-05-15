@@ -15,7 +15,8 @@ def get_config_object(env_keyword: str):
                 config_dict[obj.ENV_KEYWORD] = ".".join([obj.__module__, name])
     
     return config_dict[env_keyword]
-    
+
+
 class Config:
     ENV_KEYWORD = ""
     DEBUG = False
@@ -32,8 +33,11 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:edison@127.0.0.1/edison'
 
 # PostgreSQL connection string should be updated once an actual production environment is established.
+
+
 class ProductionConfig(Config):
     ENV_KEYWORD = "production"
+
 
 class DevelopmentConfig(Config):
     ENV_KEYWORD = "development"
