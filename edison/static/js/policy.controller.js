@@ -4,7 +4,6 @@ import { PolicyElementsModifier } from './policyElementsModifier.js'
 import { PoliciesExampleArray } from './policiesExampleArray.js'
 
 var policy = new Policy();
-var countCondition = 0;
 
 function setCardBody(policy) {
     var cardBody = createInitElement('div', 'card-body');
@@ -125,16 +124,15 @@ function showCondition(policy, countCondition, elementID) {
     element.appendChild(elementCurrCondition);
 }
 
-function initSettingToNewPolicy() {
-    policy.reset();
-
-    for (var i = 0; i < countCondition; i++) {
+function initSettingToNewPolicy() {  
+    var len = policy.getCountCondition();
+    
+    for (var i = 0; i < len; i++) {
         var element = document.getElementById(`option${i}`);
-
         element.remove();
     }
 
-    countCondition = 0;
+    policy.reset();
 }
 
 function addPolicy() {
@@ -148,8 +146,9 @@ function addPolicy() {
 
 function saveCondition() {
     addCondition(policy);
+    var countCondition = policy.getCountCondition();
     showCondition(policy, countCondition, 'condition-list');
-    countCondition++;
+    policy.incCountCondtion();
 }
 
 function mainFunctionPolicy() {

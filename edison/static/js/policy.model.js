@@ -1,10 +1,13 @@
 export class Policy {
-    constructor(name = '', room = '', command = '', condition = '',id = '') {
+    #countCondition;
+
+    constructor(name = '', room = '', command = '', condition = '', id = '') {
         this.id = id;
         this.name = name;
         this.room = room;
         this.command = command;
         this.condition = condition;
+        this.#countCondition = 0;
     }
 
     /*constructor(name = '', room = '', command = '', condition = '') {
@@ -20,6 +23,7 @@ export class Policy {
         this.room = '';
         this.command = '';
         this.condition = '';
+        this.#countCondition = 0;
     }
 
     addCondition(add_condition) {
@@ -44,5 +48,13 @@ export class Policy {
             sensors.push('shutters ' + shutters);
         }
         this.command = sensors.join(' ,');
+    }
+
+    getCountCondition() {
+        return this.#countCondition;
+    }
+
+    incCountCondtion() {
+        this.#countCondition = this.#countCondition + 1;
     }
 }
