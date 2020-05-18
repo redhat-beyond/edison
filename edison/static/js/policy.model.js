@@ -1,18 +1,14 @@
 export class Policy {
-    constructor(name = '', room = '', command = '', condition = '',id = '') {
+    #countCondition;
+
+    constructor(name = '', room = '', command = '', condition = '', id = '') {
         this.id = id;
         this.name = name;
         this.room = room;
         this.command = command;
         this.condition = condition;
+        this.#countCondition = 0;
     }
-
-    /*constructor(name = '', room = '', command = '', condition = '') {
-        this.name = name;
-        this.room = room;
-        this.command = command;
-        this.condition = condition;
-    }*/
 
     reset() {
         this.id = '';
@@ -20,6 +16,7 @@ export class Policy {
         this.room = '';
         this.command = '';
         this.condition = '';
+        this.#countCondition = 0;
     }
 
     addCondition(add_condition) {
@@ -28,6 +25,7 @@ export class Policy {
         }
 
         this.condition = this.condition + add_condition;
+        this.#countCondition++
     }
 
     addCommandToPolicy(airConditioner, light, shutters) {
@@ -44,5 +42,9 @@ export class Policy {
             sensors.push('shutters ' + shutters);
         }
         this.command = sensors.join(' ,');
+    }
+
+    getCountCondition() {
+        return this.#countCondition;
     }
 }
