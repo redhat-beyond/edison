@@ -5,18 +5,38 @@ import { PoliciesExampleArray } from './policiesExampleArray.js'
 
 var policy = new Policy();
 
+function createUpadateButton(classButton, id) {
+    var updateButton = createInitElement('button', classButton, id);
+
+    updateButton.innerHTML = 'Update';
+    updateButton.setAttribute('data-toggle', 'collapse');
+    updateButton.setAttribute('data-target', `#collapse-${id}`);
+    updateButton.setAttribute('type', 'false');
+    updateButton.setAttribute('aria-expanded', 'button');
+    updateButton.setAttribute('aria-controls', `collapse-${id}`);
+    
+    return updateButton
+}
+
 function setCardBody(policy) {
     var cardBody = createInitElement('div', 'card-body');
     var cardTitle = createInitElement('h5', 'card_title');
     var cardText = createInitElement('h5');
+    var updateButton = createUpadateButton('btn btn-primary', `update-policy${policy.id}`);
+    var headerUpdateButton = createInitElement('div', 'collapse', `collapse-update-policy${policy.id}`);
+    var cardCardBodyUpdateButton = createInitElement('div', 'card card-body update');
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
+    cardBody.appendChild(updateButton);
+    cardBody.appendChild(headerUpdateButton);
+    headerUpdateButton.appendChild(cardCardBodyUpdateButton);
     cardText.innerHTML = `This policy is associated with ${policy.room} room and responsible for ${policy.command}
     with these conditions: ${policy.condition}`;
 
     return cardBody;
 }
+
 
 function createCard(policy) {
     var card = createInitElement('div', 'card');
