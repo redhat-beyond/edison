@@ -45,7 +45,7 @@ function getFromBackend() {
         var newPolicy = new Policy(jsonPolicyExample[i].name, jsonPolicyExample[i].room, jsonPolicyExample[i].command, jsonPolicyExample[i].condition, jsonPolicyExample[i].id)
         policiesArray.push(newPolicy);
     }
-    
+
     return policiesArray;
 }
 
@@ -118,16 +118,16 @@ function showCondition(policy, countCondition, elementID) {
     var element = document.getElementById(elementID);
     var elementCurrCondition = createInitElement('option', '', `option${countCondition}`);
     var arrCondition = policy.condition.split(', ');
-    var currCondition = arrCondition[countCondition];
+    var currCondition = arrCondition[countCondition - 1];
 
-    elementCurrCondition.innerHTML = `${countCondition + 1}: ${currCondition} `;
+    elementCurrCondition.innerHTML = `${countCondition}: ${currCondition} `;
     element.appendChild(elementCurrCondition);
 }
 
-function initSettingToNewPolicy() {  
+function initSettingToNewPolicy() {
     var len = policy.getCountCondition();
-    
-    for (var i = 0; i < len; i++) {
+
+    for (var i = 1; i <= len; i++) {
         var element = document.getElementById(`option${i}`);
         element.remove();
     }
@@ -148,9 +148,6 @@ function saveCondition() {
     addCondition(policy);
     var countCondition = policy.getCountCondition();
     showCondition(policy, countCondition, 'condition-list');
-    var count = policy.getCountCondition();
-    count++;
-    policy.setCountCondtion(count);
 }
 
 function mainFunctionPolicy() {

@@ -5,7 +5,7 @@ export class PoliciesExampleArray {
         this.jsonPolicesExample = [{
             'id': '1',
             'name': 'Test Policy One',
-            'room': 'living room',
+            'room': 'livingroom',
             'command': 'light On, shutters Off',
             'condition': 'humidity < 40, temperatrue < 25'
         }, {
@@ -17,7 +17,7 @@ export class PoliciesExampleArray {
         },{
             'id': '3',
             'name': 'Test Policy Three',
-            'room': 'bed room',
+            'room': 'bedroom',
             'command': 'shutters Off',
             'condition': 'humidity > 80, temperatrue between 30 50'
         }];
