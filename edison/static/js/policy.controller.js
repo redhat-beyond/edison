@@ -148,7 +148,9 @@ function saveCondition() {
     addCondition(policy);
     var countCondition = policy.getCountCondition();
     showCondition(policy, countCondition, 'condition-list');
-    policy.incCountCondtion();
+    var count = policy.getCountCondition();
+    count++;
+    policy.setCountCondtion(count);
 }
 
 function mainFunctionPolicy() {

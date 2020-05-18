@@ -10,13 +10,6 @@ export class Policy {
         this.#countCondition = 0;
     }
 
-    /*constructor(name = '', room = '', command = '', condition = '') {
-        this.name = name;
-        this.room = room;
-        this.command = command;
-        this.condition = condition;
-    }*/
-
     reset() {
         this.id = '';
         this.name = '';
@@ -54,7 +47,7 @@ export class Policy {
         return this.#countCondition;
     }
 
-    incCountCondtion() {
-        this.#countCondition = this.#countCondition + 1;
+    setCountCondtion(count) {
+        this.#countCondition = count;
     }
 }

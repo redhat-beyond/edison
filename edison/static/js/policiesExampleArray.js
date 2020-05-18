@@ -5,21 +5,21 @@ export class PoliciesExampleArray {
         this.jsonPolicesExample = [{
             'id': '1',
             'name': 'Test Policy One',
-            'room': 'living',
+            'room': 'living room',
             'command': 'light On, shutters Off',
-            'condition': 'humidity < 40, tempetrue < 25'
+            'condition': 'humidity < 40, temperatrue < 25'
         }, {
             'id': '2',
             'name': 'Test Policy Two',
             'room': 'kitchen',
             'command': 'shutters Off',
-            'condition': 'humidity > 80, tempetrue between 30 50'
+            'condition': 'humidity > 80, temperatrue between 30 50'
         },{
             'id': '3',
             'name': 'Test Policy Three',
-            'room': 'bad',
+            'room': 'bed room',
             'command': 'shutters Off',
-            'condition': 'humidity > 80, tempetrue between 30 50'
+            'condition': 'humidity > 80, temperatrue between 30 50'
         }];
     }
 }
