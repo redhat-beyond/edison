@@ -42,9 +42,8 @@ api.add_resource(Login, '/login')
 api.add_resource(LogoutAccess, '/logout/access')
 api.add_resource(LogoutRefresh, '/logout/refresh')
 api.add_resource(TokenRefresh, '/token-refresh')
-api.add_resource(NewPolicy, '/NewPolicy')
-api.add_resource(Policy, '/Policy/<string:policy_name>')
-api.add_resource(Policies, '/Policies')
+api.add_resource(Policy, '/policy/<string:policy_name>')
+api.add_resource(Policies, '/policies')
 
 
 @app.route("/")

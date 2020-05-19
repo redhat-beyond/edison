@@ -75,3 +75,28 @@ class Policy(Resource):
             status = 400
 
         return response, status
+
+    @jwt_required
+    def post(self, policy_name: str):
+
+        data = Policy.parser.parse_args()
+        username = get_jwt_identity()
+        current_user = models.User.query.filter_by(username=username).first()
+        filters = {'policy_name': data['policy_name'], 'user_id': current_user.id}
+
+        if models.Policy.query.filter_by(**filters).first() is None:
+            try:
+                policy_to_add = models.Policy(**data, user_id=current_user.id)
+                db.session.add(policy_to_add)
+                db.session.commit()
+                status = 200
+                response = {'msg': 'policy added successfully'}
+
+            except KeyError:
+                response = {'msg': 'Update failed. Json missing keys.'}
+                status = 400
+        else:
+            status = 400
+            response = {'msg': f"User {username} already have policy named {data['policy_name']}"}
+
+        return response, status
