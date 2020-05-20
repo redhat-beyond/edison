@@ -5,7 +5,7 @@ import { PoliciesExampleArray } from './policiesExampleArray.js'
 
 var policy = new Policy();
 
-function createUpadateButton(classButton, id) {
+function createUpdateButton(classButton, id) {
     var updateButton = createInitElement('button', classButton, id);
 
     updateButton.innerHTML = 'Update';
@@ -22,15 +22,15 @@ function setCardBody(policy) {
     var cardBody = createInitElement('div', 'card-body');
     var cardTitle = createInitElement('h5', 'card_title');
     var cardText = createInitElement('h5');
-    var updateButton = createUpadateButton('btn btn-primary', `update-policy${policy.id}`);
+    var updateButton = createUpdateButton('btn btn-primary', `update-policy${policy.id}`);
     var headerUpdateButton = createInitElement('div', 'collapse', `collapse-update-policy${policy.id}`);
-    var cardCardBodyUpdateButton = createInitElement('div', 'card card-body update');
+    var cardBodyUpdateButton = createInitElement('div', 'card card-body update');
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     cardBody.appendChild(updateButton);
     cardBody.appendChild(headerUpdateButton);
-    headerUpdateButton.appendChild(cardCardBodyUpdateButton);
+    headerUpdateButton.appendChild(cardBodyUpdateButton);
     cardText.innerHTML = `This policy is associated with ${policy.room} room and responsible for ${policy.command}
     with these conditions: ${policy.condition}`;
 
