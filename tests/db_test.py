@@ -1,17 +1,21 @@
 import pytest
-import psycopg2
+import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy_utils import database_exists
 
 
-def test_users_table_rows_count(cursor, build_users_table):
-    cursor.execute("""
-    SELECT * FROM users;
-    """)
-    result = cursor.fetchall()
-    assert len(result) == 1
+db_uri = 'postgresql://postgres:edison@127.0.0.1/edison'
 
-def test_username(cursor, build_users_table):
-    cursor.execute("""
-    SELECT username FROM users;
-    """)
-    result = cursor.fetchone()
-    assert result[0] == "ahinoam"
+@pytest.fixture
+def engine():
+    return create_engine(db_uri)
+
+def test_db_exist():
+    assert database_exists(db_uri) is True
+
+def test_db_connection(engine):
+    assert engine.connect() is not None
+
+def test_db_tables_exist(engine):
+    tables = sqlalchemy.inspect(engine).get_table_names()
+    assert tables == ['users']
