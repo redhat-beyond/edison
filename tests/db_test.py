@@ -18,4 +18,4 @@ def test_db_connection(engine):
 
 def test_db_tables_exist(engine):
     tables = sqlalchemy.inspect(engine).get_table_names()
-    assert tables == ['users']
+    assert 'users' in tables
