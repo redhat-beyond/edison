@@ -5,7 +5,7 @@ import { PoliciesExampleArray } from './policiesExampleArray.js'
 
 var policy = new Policy();
 
-function createNameField(policy) {
+function createTextElementForNameUpdate(policy) {
 
     var id = `policy-name${policy.id}`;
     var groupName = createInitElement('div', 'form-group');
@@ -41,16 +41,14 @@ function setCardBody(policy) {
     var updateButton = createUpdateButton('btn btn-primary', `update-policy${policy.id}`);
     var headerUpdateButton = createInitElement('div', 'collapse', `collapse-update-policy${policy.id}`);
     var cardBodyUpdateButton = createInitElement('div', 'card card-body update');
-    var form = createInitElement('form');
-    var nameField = createNameField(policy)
+    var nameField = createTextElementForNameUpdate(policy)
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     cardBody.appendChild(updateButton);
     cardBody.appendChild(headerUpdateButton);
     headerUpdateButton.appendChild(cardBodyUpdateButton);
-    cardBodyUpdateButton.appendChild(form);
-    form.appendChild(nameField);
+    cardBodyUpdateButton.appendChild(nameField);
     cardText.innerHTML = `This policy is associated with ${policy.room} room and responsible for ${policy.command}
     with these conditions: ${policy.condition}`;
 
