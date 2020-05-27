@@ -1,0 +1,39 @@
+.policy {
+  padding: 0.4em;
+  top: 5rem;
+  position: fixed;
+}
+
+.active {
+  font-size: 120%;
+}
+
+.card-header {
+  font-size: 100%;
+}
+
+.btn-link {
+  font-size: 120%;
+  height: 1.6rem;
+}
+
+.btn {
+  font-size: 120%;
+  margin: 1rem;
+}
+
+.modal-body {
+  font-size: 120%;
+}
+
+.condition-term {
+  display: none;
+}
+
+.card{
+  width: 50rem;
+}
+
+.update{
+  width: 48rem;
+}
