@@ -8,11 +8,11 @@ var policy = new Policy();
 function capitalize(string) {
     if (typeof string !== 'string') return ''
     return `${string.charAt(0).toUpperCase()}${string.slice(1)}`
-  }
+}
 
 function createTextElementForUpdate(id, fieldName, field) {
 
-    var id = `policy-${fieldName} ${id}`;
+    var id = `policy-${fieldName}${id}`;
     var groupName = createInitElement('div', 'form-group');
     var labelName = createInitElement('label');
     var inputName = createInitElement('input', 'form-control', id);
@@ -48,7 +48,7 @@ function setCardBody(policy) {
     var headerUpdateButton = createInitElement('div', 'collapse', `collapse-update-policy${policy.id}`);
     var cardBodyUpdateButton = createInitElement('div', 'card card-body update');
     var nameField = createTextElementForUpdate(policy.id, 'name', policy.name)
-    var roomField = createTextElementForUpdate(policy.id,'room',policy.room)
+    var roomField = createTextElementForUpdate(policy.id, 'room', policy.room)
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
