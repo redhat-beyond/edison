@@ -16,3 +16,4 @@ _pycache_/
 
 # Python
 *.pyc
+.cache
