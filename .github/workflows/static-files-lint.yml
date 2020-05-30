@@ -1,0 +1,33 @@
+name: Static Files Lint
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: cd edison/linters/for-static-files && npm install
+
+      - name: Lint ESLint
+        run: cd edison/linters/for-static-files && npm run lint:eslint
+
+      - name: Lint Prettier
+        run: cd edison/linters/for-static-files && npm run lint:prettier
