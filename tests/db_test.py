@@ -7,7 +7,7 @@ from sqlalchemy_utils import database_exists
 db_uri = 'postgresql://postgres:edison@127.0.0.1/edison'
 
 @pytest.fixture
-def engine():
+def engine(scope="module"):
     return create_engine(db_uri)
 
 def test_db_exist():
