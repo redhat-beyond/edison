@@ -1,6 +1,4 @@
-const right_edge = '<div class="col-md-1 d-flex" id="right_edge" style="padding: 0;margin: 0;padding-top: 15px;padding-bottom: 15px;opacity: 1;">' +
-		'<div class="w-100 rounded-right" style="background-color: rgba(0,0,0,0.7);padding-top: 0;padding-bottom: 0;"></div>' +
-		'</div>';
+var right_edge
 
 function ajaxCall(url, data, method, successCallback, errorCallback) {
 	$.ajax({
@@ -47,16 +45,17 @@ function signinBtn() {
 
 
 $(function() {
-	document.getElementById("main_block_btn").onclick = signinBtn;
+	$("main_block_btn").onclick = signinBtn;
     
 	$("#btn_signup").click(function() {
-		document.getElementById("main_block_btn").onclick = signupBtn;
+		$("main_block_btn").onclick = signupBtn;
 		$("#btn_forgot_password").fadeOut(0);
 		$("#hide_div_back").css("display", "block");
 		$("#sub_text_div").css("display", "none");
 		$("#right_login").css("display", "block");
 		$("#main_block_btn").text("SIGN UP");
 		$("#main_block_title").text("sign up");
+		right_edge = $("#right_edge")
 		$("#right_edge").remove();
 		$("#main_block").animate({
             left: "-150px",
@@ -66,7 +65,7 @@ $(function() {
 	});
 	
     $("#btn_right_login").click(function() {
-		document.getElementById("main_block_btn").onclick = signinBtn;
+		$("main_block_btn").onclick = signinBtn;
 		$("#btn_forgot_password").fadeIn(0);
 		$("#sub_text_div").css("display", "block");
 		$("#login_screen").append(right_edge);
