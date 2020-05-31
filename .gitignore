@@ -5,3 +5,4 @@
 *.pyc
 _pycache_/
 db.sql
+.DS_Store
