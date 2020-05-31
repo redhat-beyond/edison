@@ -36,12 +36,6 @@ def check_if_token_in_blacklist(decrypted_token):
 
 
 api.add_resource(User, '/user/<string:username>')
-api.add_resource(Users, '/users')
-api.add_resource(SignUp, '/signup')
-api.add_resource(Login, '/login')
-api.add_resource(LogoutAccess, '/logout/access')
-api.add_resource(LogoutRefresh, '/logout/refresh')
-api.add_resource(TokenRefresh, '/token-refresh')
 api.add_resource(Policy, '/policy/<string:policy_name>')
 api.add_resource(Policies, '/policies')
 
