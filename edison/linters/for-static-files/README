@@ -16,16 +16,21 @@ The files in this folder are used by the static files lint CI located at ".githu
 
     The main packages being used by that CI are:
         1.  ESLint - The most popular JavaScript linter, a tool that analyzes code for errors, which can include stylistic errors but also coding errors that lead to bugs.
+                ESLint uses a config file called ".eslintrc.json" that describes the rules to be followed when analyzing code.
         2.  Prettier - A tool used for analyzing the HTML, CSS, JSON and yml in our project for stylistic errors and errors that lead to bugs.
 
 # Linters usage
 
     If you wish to use those tools as part of your development process you should first install npm on your machine (it comes with the installment of Node.js).
+    To install npm and Node.js on linux read this guide - https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/.
+    To install npm and Node.js on Windows download Node.js installer here - https://nodejs.org/.
+
     Now follow these steps:
         1.  Enter the folder at this path - edison/linters/for-static-files.
         2.  Run "npm install".
     A folder called "node_modules" should be created inside the current directory.
 
-    To use ESLint run "npm run lint:eslint".
-    To use Prettier run "npm run lint:prettier".
-    To format the code run "npm run prettier:format".
+    The following commands should be run within "edison/linters/for-static-files".
+        -   To use ESLint run "npm run lint:eslint".
+        -   To use Prettier run "npm run lint:prettier".
+        -   To format the code run "npm run prettier:format".
