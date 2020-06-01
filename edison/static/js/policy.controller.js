@@ -10,6 +10,34 @@ function capitalize(string) {
     return `${string.charAt(0).toUpperCase()}${string.slice(1)}`
 }
 
+function commandField(policy)
+{
+    var commandRow = createInitElement('div', 'form-row')
+    var light =   createCommandField('light', policy)
+    var ac =   createCommandField('ac', policy);
+    var shutters =  createCommandField('shutters', policy);
+    
+    commandRow.appendChild(light);
+    commandRow.appendChild(ac);
+    commandRow.appendChild(shutters);
+    return commandRow;
+}
+
+
+function createCommandField(fieldName, policy) {
+
+    var id = `policy-${fieldName}${policy.id}`;
+    var group = createInitElement('div', 'form-group col-md-4');
+    var labelElement = createInitElement('label');
+    var select = createInitElement('select', 'form-control', id);
+    var labelName = capitalize(fieldName);
+
+    labelElement.innerHTML = labelName;
+    group.appendChild(labelElement);
+    group.appendChild(select);
+
+    return group;
+}
 function createTextElementForUpdate(id, fieldName, field) {
 
     var id = `policy-${fieldName}${id}`;
@@ -21,7 +49,7 @@ function createTextElementForUpdate(id, fieldName, field) {
     labelName.setAttribute('for', id);
     labelName.innerHTML = label;
     groupName.appendChild(labelName);
-    inputName.setAttribute('type', "text");
+    inputName.setAttribute('type', 'text');
     inputName.setAttribute('placeholder', field);
     groupName.appendChild(inputName);
 
@@ -47,8 +75,9 @@ function setCardBody(policy) {
     var updateButton = createUpdateButton('btn btn-primary', `update-policy${policy.id}`);
     var headerUpdateButton = createInitElement('div', 'collapse', `collapse-update-policy${policy.id}`);
     var cardBodyUpdateButton = createInitElement('div', 'card card-body update');
-    var nameField = createTextElementForUpdate(policy.id, 'name', policy.name)
-    var roomField = createTextElementForUpdate(policy.id, 'room', policy.room)
+    var nameField = createTextElementForUpdate(policy.id, 'name', policy.name);
+    var roomField = createTextElementForUpdate(policy.id, 'room', policy.room);
+    var commandRow = commandField(policy);
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
@@ -57,6 +86,7 @@ function setCardBody(policy) {
     headerUpdateButton.appendChild(cardBodyUpdateButton);
     cardBodyUpdateButton.appendChild(nameField);
     cardBodyUpdateButton.appendChild(roomField);
+    cardBodyUpdateButton.appendChild(commandRow);
     cardText.innerHTML = `This policy is associated with ${policy.room} room and responsible for ${policy.command}
     with these conditions: ${policy.condition}`;
 
