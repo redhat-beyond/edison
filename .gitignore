@@ -1,8 +1,24 @@
+
+# Vagrant stuff
+acceptance_config.yml
+boxes/*
+/.vagrant
+/website/.vagrant
+/website/build
+/vagrant-spec.config.rb
+test/vagrant-spec/.vagrant/
+
+# Logs
 *.log
-/.vagrant/*
-*/.idea/*
-*.box
-*.pyc
+
+# IDE
 _pycache_/
-db.sql
+.idea/*
 .DS_Store
+
+# Python
+*.pyc
+*.orig
+*.pyc.*
+/.cache
+

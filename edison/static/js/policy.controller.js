@@ -5,6 +5,28 @@ import { PoliciesExampleArray } from './policiesExampleArray.js'
 
 var policy = new Policy();
 
+function capitalize(string) {
+    if (typeof string !== 'string') return ''
+    return `${string.charAt(0).toUpperCase()}${string.slice(1)}`
+}
+
+function createTextElementForUpdate(id, fieldName, field) {
+
+    var id = `policy-${fieldName}${id}`;
+    var groupName = createInitElement('div', 'form-group');
+    var labelName = createInitElement('label');
+    var inputName = createInitElement('input', 'form-control', id);
+    var label = capitalize(fieldName)
+
+    labelName.setAttribute('for', id);
+    labelName.innerHTML = label;
+    groupName.appendChild(labelName);
+    inputName.setAttribute('type', "text");
+    inputName.setAttribute('placeholder', field);
+    groupName.appendChild(inputName);
+
+    return groupName;
+}
 function createUpdateButton(classButton, id) {
     var updateButton = createInitElement('button', classButton, id);
 
@@ -14,7 +36,7 @@ function createUpdateButton(classButton, id) {
     updateButton.setAttribute('type', 'false');
     updateButton.setAttribute('aria-expanded', 'button');
     updateButton.setAttribute('aria-controls', `collapse-${id}`);
-    
+
     return updateButton
 }
 
@@ -25,12 +47,16 @@ function setCardBody(policy) {
     var updateButton = createUpdateButton('btn btn-primary', `update-policy${policy.id}`);
     var headerUpdateButton = createInitElement('div', 'collapse', `collapse-update-policy${policy.id}`);
     var cardBodyUpdateButton = createInitElement('div', 'card card-body update');
+    var nameField = createTextElementForUpdate(policy.id, 'name', policy.name)
+    var roomField = createTextElementForUpdate(policy.id, 'room', policy.room)
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     cardBody.appendChild(updateButton);
     cardBody.appendChild(headerUpdateButton);
     headerUpdateButton.appendChild(cardBodyUpdateButton);
+    cardBodyUpdateButton.appendChild(nameField);
+    cardBodyUpdateButton.appendChild(roomField);
     cardText.innerHTML = `This policy is associated with ${policy.room} room and responsible for ${policy.command}
     with these conditions: ${policy.condition}`;
 
@@ -155,22 +181,21 @@ function initSettingToNewPolicy() {
     policy.reset();
 }
 
+
 function addPolicy() {
     policy.name = document.getElementById('policy-name').value;
     policy.room = document.getElementById('policy-room').value;
     setCommand(policy);
-    var json = {
+
+    var jsonPolicy = {
         'policy_name': policy.name,
         'room': policy.room,
         'commands': policy.command,
         'conditions': policy.condition
     }
-    //this function will be enable when the route wiil be ready
-    console.log(json) 
-    $.post('/policy/new policy', json, function(){ }); 
 
     //this function will be enable when the route wiil be ready
-    //$.post('/policy', policy, function(){ });
+    //$.post('/policy/new_policy', json, function(){ },"json");
     initSettingToNewPolicy();
 }
 
