@@ -30,6 +30,10 @@
   display: none;
 }
 
-.card{
+.card {
   width: 50rem;
+}
+
+.update {
+  width: 48rem;
 }

@@ -1,10 +1,19 @@
-{% extends 'layout.html' %}
-{% block body %}
+{% extends 'layout.html' %} {% block body %}
 <div class="policy">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Policy.css') }}">
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='css/Policy.css') }}"
+  />
   <div class="container">
-    <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapse-add-policy" type="button"
-      aria-expanded="false" aria-controls="collapse-add-policy">
+    <button
+      class="btn btn-primary collapsed"
+      data-toggle="collapse"
+      data-target="#collapse-add-policy"
+      type="button"
+      aria-expanded="false"
+      aria-controls="collapse-add-policy"
+    >
       Add Policy
     </button>
     <div class="collapse" id="collapse-add-policy">
@@ -12,11 +21,21 @@
         <form>
           <div class="form-group">
             <label for="policy-name">Name</label>
-            <input type="text" class="form-control" id="policy-name" placeholder="my policy">
+            <input
+              type="text"
+              class="form-control"
+              id="policy-name"
+              placeholder="my policy"
+            />
           </div>
           <div class="form-group">
             <label for="policy-room">Room</label>
-            <input type="text" class="form-control" id="policy-room" placeholder="Living Room">
+            <input
+              type="text"
+              class="form-control"
+              id="policy-room"
+              placeholder="Living Room"
+            />
           </div>
           <div class="form-row">
             <div class="form-group col-md-4">
@@ -46,9 +65,15 @@
           </div>
           <div class="form-row">
             <div class="form-group col-md-4">
-              <button class="btn btn-link collapsed" id='add-condition' data-toggle="collapse"
-                data-target="#collapse-add-condition" type="button" aria-expanded="false"
-                aria-controls="collapse-add-condition">
+              <button
+                class="btn btn-link collapsed"
+                id="add-condition"
+                data-toggle="collapse"
+                data-target="#collapse-add-condition"
+                type="button"
+                aria-expanded="false"
+                aria-controls="collapse-add-condition"
+              >
                 Add Condition
               </button>
             </div>
@@ -74,40 +99,77 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-4 condition-term" id="show-equal-under-above">
-                <label id="label-equal-under-above" for="equal-under-above"></label>
-                <input type="number" id="equal-under-above" class="form-control" placeholder="30">
+              <div
+                class="form-group col-md-4 condition-term"
+                id="show-equal-under-above"
+              >
+                <label
+                  id="label-equal-under-above"
+                  for="equal-under-above"
+                ></label>
+                <input
+                  type="number"
+                  id="equal-under-above"
+                  class="form-control"
+                  placeholder="30"
+                />
               </div>
               <div class="form-group col-md-4 condition-term" id="show-from">
                 <label for="from">From</label>
-                <input type="number" id="from" class="form-control" placeholder="30">
+                <input
+                  type="number"
+                  id="from"
+                  class="form-control"
+                  placeholder="30"
+                />
               </div>
               <div class="form-group col-md-4 condition-term" id="show-to">
                 <label for="to">To</label>
-                <input type="number" id="to" class="form-control" placeholder="50">
+                <input
+                  type="number"
+                  id="to"
+                  class="form-control"
+                  placeholder="50"
+                />
               </div>
             </div>
-            <button id='save-condition' class="btn btn-info" data-toggle="collapse" data-target="#collapse-add-condition"
-              type="button" aria-expanded="false">
+            <button
+              id="save-condition"
+              class="btn btn-info"
+              data-toggle="collapse"
+              data-target="#collapse-add-condition"
+              type="button"
+              aria-expanded="false"
+            >
               Save Condition
+            </button>
+            <button
+              id="save-policy"
+              type="button"
+              class="btn btn-outline-info"
+              data-toggle="collapse"
+              data-target="#collapse-add-policy"
+              type="button"
+              aria-expanded="false"
+            >
+              Save Policy
+            </button>
           </div>
-          </button>
-          <button id='save-policy' type="button" class="btn btn-outline-info" data-toggle="collapse"
-            data-target="#collapse-add-policy" type="button" aria-expanded="false">Save Policy</button>
           <div class="form-row">
             <div class="form-group col-md-4">
               <p></p>
               <label for="condition-list">condition</label>
-              <select class="form-control" id="condition-list">
-              </select>
+              <select class="form-control" id="condition-list"> </select>
             </div>
           </div>
         </form>
       </div>
     </div>
-    <div id = "show-policies">
-    </div>
+    <div id="show-policies"></div>
   </div>
-  <script type="module" src="{{ url_for('static', filename='js/policy.controller.js') }}"></script>
+  <script
+    type="module"
+    src="{{ url_for('static', filename='js/policy.controller.js') }}"
+  ></script>
 </div>
 {% endblock %}
