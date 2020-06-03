@@ -24,10 +24,10 @@ jobs:
           node-version: '14'
 
       - name: Install Dependencies
-        run: cd edison/linters/for-static-files && npm install
+        run: npm install
 
       - name: Lint ESLint
-        run: cd edison/linters/for-static-files && npm run lint:eslint
+        run: npm run lint:eslint
 
       - name: Lint Prettier
-        run: cd edison/linters/for-static-files && npm run lint:prettier
+        run: npm run lint:prettier
