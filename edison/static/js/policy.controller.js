@@ -10,12 +10,12 @@ function capitalize(string) {
     return `${string.charAt(0).toUpperCase()}${string.slice(1)}`
 }
 
-function commandField(policy)
+function createCommandField(policy)
 {
     var commandRow = createInitElement('div', 'form-row')
-    var light =   createCommandField('light', policy)
-    var ac =   createCommandField('ac', policy);
-    var shutters =  createCommandField('shutters', policy);
+    var light =   createCommandFieldParameters('light', policy)
+    var ac =   createCommandFieldParameters('ac', policy);
+    var shutters =  createCommandFieldParameters('shutters', policy);
     
     commandRow.appendChild(light);
     commandRow.appendChild(ac);
@@ -24,7 +24,7 @@ function commandField(policy)
 }
 
 
-function createCommandField(fieldName, policy) {
+function createCommandFieldParameters(fieldName, policy) {
 
     var id = `policy-${fieldName}${policy.id}`;
     var group = createInitElement('div', 'form-group col-md-4');
@@ -77,7 +77,7 @@ function setCardBody(policy) {
     var cardBodyUpdateButton = createInitElement('div', 'card card-body update');
     var nameField = createTextElementForUpdate(policy.id, 'name', policy.name);
     var roomField = createTextElementForUpdate(policy.id, 'room', policy.room);
-    var commandRow = commandField(policy);
+    var commandRow = createCommandField(policy);
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
