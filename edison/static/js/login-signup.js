@@ -1,46 +1,43 @@
 var right_edge
 
-function ajaxCall(url, data, method, successCallback, errorCallback) {
+function signupBtn() {
 	$.ajax({
-		method: method,
+		method: 'POST',
 		dataType: "json",
-		url: url,
-		data: data,
-		success: successCallback,
-		error: errorCallback
+		url: 'signup',
+		data: {
+			'username': $("#main_form_email").val(),
+			'password': $("#main_form_password").val()
+		},
+		contentType: 'application/json',
+		success: function(data) {
+			window.location.assign("/");
+		},
+		error: function(data) {
+			console.log(data);
+			$("#error_message").text(data).delay(5000).fadeOut(400);
+		}
 	});
 }
 
-function signupBtn() {
-	ajaxCall(
-		'signup',
-		{
-			'username': $("#main_form_email").val(),
-			'password': $("#main_form_password").val()
-		}, "POST", 
-		function(data) {
-			window.location.replace("/");
-		}, function(data) {
-			console.log(data);
-			$("#error_message").text(data).delay(5000).fadeOut(400);
-		}
-	);
-}
-
 function signinBtn() {
-	ajaxCall(
-		'login',
-		{
+	$.ajax({
+		method: 'POST',
+		dataType: "json",
+		url: 'login',
+		data: {
 			'username': $("#main_form_email").val(),
 			'password': $("#main_form_password").val()
-		}, "POST", 
-		function(data) {
-			window.location.replace("/");
-		}, function(data) {
+		},
+		contentType: 'application/json',
+		success: function(data) {
+			window.location.assign("/");
+		},
+		error: function(data) {
 			console.log(data);
 			$("#error_message").text(data).delay(5000).fadeOut(400);
 		}
-	);
+	});
 }
 
 
@@ -60,8 +57,7 @@ $(function() {
 		$("#main_block").animate({
             left: "-150px",
 			},
-			250, 'linear', function() {
-			});
+			250, 'linear');
 	});
 	
     $("#btn_right_login").click(function() {
@@ -72,8 +68,7 @@ $(function() {
 		$("#main_block").animate({
             left: "0px",
 			},
-			250, 'linear', function() {
-			});
+			250, 'linear');
 		$("#right_login").css("display", "none");
 		$("#main_block_btn").text("LOG IN");
 		$("#main_block_title").text("log in");

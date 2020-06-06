@@ -34,7 +34,6 @@ body{
 .login-block{
     background-color: #ffffff;
     position: absolute;
-    padding: 20px;
     padding-top: 40px;
     padding-left: 30px;
     padding-bottom: 40px;
@@ -72,7 +71,7 @@ body{
 }
 
 .switch-login-text-position{
-    position: absolutel
+    position: absolute;
 }
 
 .default-font{
