@@ -16,6 +16,6 @@ _pycache_/
 
 # Python
 *.pyc
+.cache
 *.orig
 *.pyc.*
-/.cache

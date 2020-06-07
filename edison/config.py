@@ -37,3 +37,7 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     ENV_KEYWORD = "development"
     DEBUG = True
+
+class TestConfig(Config):
+    ENV_KEYWORD = "test"
+    TESTING = True
