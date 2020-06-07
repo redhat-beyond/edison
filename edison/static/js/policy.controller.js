@@ -8,7 +8,31 @@ function capitalize(string) {
   if (typeof string !== 'string') return '';
   return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 }
+function createCommandField(policy)
+{
+  var commandRow = createInitElement('div', 'form-row')
+  var light =   createCommandFieldParameters('light', policy)
+  var ac =   createCommandFieldParameters('ac', policy);
+  var shutters =  createCommandFieldParameters('shutters', policy);
+    
+  commandRow.appendChild(light);
+  commandRow.appendChild(ac);
+  commandRow.appendChild(shutters);
+  return commandRow;
+}
+function createCommandFieldParameters(fieldName, policy) {
+  var id = `policy-${fieldName}${policy.id}`;
+  var group = createInitElement('div', 'form-group col-md-4');
+  var labelElement = createInitElement('label');
+  var select = createInitElement('select', 'form-control', id);
+  var labelName = capitalize(fieldName);
 
+  labelElement.innerHTML = labelName;
+  group.appendChild(labelElement);
+  group.appendChild(select);
+
+  return group;
+}
 function createTextElementForUpdate(id, fieldName, field) {
   var _id = `policy-${fieldName}${id}`;
   var groupName = createInitElement('div', 'form-group');
@@ -54,6 +78,7 @@ function setCardBody(policy) {
   var cardBodyUpdateButton = createInitElement('div', 'card card-body update');
   var nameField = createTextElementForUpdate(policy.id, 'name', policy.name);
   var roomField = createTextElementForUpdate(policy.id, 'room', policy.room);
+  var commandRow = createCommandField(policy);
 
   cardBody.appendChild(cardTitle);
   cardBody.appendChild(cardText);
@@ -62,6 +87,7 @@ function setCardBody(policy) {
   headerUpdateButton.appendChild(cardBodyUpdateButton);
   cardBodyUpdateButton.appendChild(nameField);
   cardBodyUpdateButton.appendChild(roomField);
+  cardBodyUpdateButton.appendChild(commandRow);
   cardText.innerHTML = `This policy is associated with ${policy.room} room and responsible for ${policy.command}
     with these conditions: ${policy.condition}`;
 
