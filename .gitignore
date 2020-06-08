@@ -1,3 +1,4 @@
+
 # Vagrant stuff
 acceptance_config.yml
 boxes/*
@@ -13,9 +14,11 @@ test/vagrant-spec/.vagrant/
 # IDE
 _pycache_/
 .idea/*
+.DS_Store
 
 # Python
 *.pyc
 *.orig
 *.pyc.*
 /.cache
+

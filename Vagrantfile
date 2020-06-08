@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
 end
 
 # Fixes a dhcp configuration conflict of the private network.
-# Issue: https://github.com/hashicorp/vagrant/issues/8878
+# Issue: https://github.com/hashicorp/vagrant/issues/3083
 class VagrantPlugins::ProviderVirtualBox::Action::Network
   def dhcp_server_matches_config?(dhcp_server, config)
     true
