@@ -4,13 +4,8 @@
     "browser": true,
     "es6": true
   },
-  "plugins": [
-    "prettier"
-  ],
-  "extends": [
-    "plugin:prettier/recommended", 
-    "eslint:recommended"
-  ],
+  "plugins": ["prettier"],
+  "extends": ["plugin:prettier/recommended", "eslint:recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -21,8 +16,9 @@
   },
   "rules": {
     "prettier/prettier": [
-      "error", {
-        "singleQuote": true, 
+      "error",
+      {
+        "singleQuote": true,
         "parser": "flow"
       }
     ],

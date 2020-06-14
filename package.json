@@ -10,7 +10,7 @@
   },
   "scripts": {
     "lint:eslint": "eslint edison/static/js/*.js --quiet",
-    "lint:prettier": "prettier --single-quote \"*/**/*.{json,yml,html,css}\" --check",
-    "prettier:format": "prettier --single-quote --write \"*/**/*.{json,yml,html,css,js}\" \".github/**/*\""
+    "lint:prettier": "prettier --single-quote \"**/*.{json,yml,html,css}\" --check",
+    "prettier:format": "prettier --single-quote --write \"**/*.{json,yml,html,css,js}\" \".github/**/*\""
   }
 }

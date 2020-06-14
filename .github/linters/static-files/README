@@ -18,7 +18,6 @@
         2.  Prettier - A tool used for analyzing the HTML, CSS, JSON and yml in our project for stylistic errors and errors that lead to bugs.
                 Prettier uses a config file called ".prettierrc.json" that describes the rules to be followed when analyzing code.
 
-
 # Linters usage
 
     1.  If you wish to use those tools as part of your development process you should first install npm on your machine (it comes with the installment of Node.js).
