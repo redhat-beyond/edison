@@ -18,4 +18,7 @@ _pycache_/
 *.pyc
 *.orig
 *.pyc.*
-/.cache
+.cache
+
+# npm
+node_modules

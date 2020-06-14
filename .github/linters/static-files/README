@@ -1,0 +1,30 @@
+# CI overview
+
+    That particular CI runs on Node.js server, so packages required for this CI need to be installed via "npm".
+    npm installs packages inside a folder (automatically created in the PWD) called "node_modules".
+    npm uses two files in order to install required packages:
+        1.  package.json - this file holds various metadata relevant to the project.
+                This file is used to give information to npm that allows it to identify the project as well as handle the project"s dependencies.
+        2.  package-lock.json - automatically generated for any operations where npm modifies either the node_modules tree, or package.json.
+                It describes the exact tree that was generated, such that subsequent installs are able to generate identical trees, regardless of intermediate dependency updates.
+
+    The static files lint CI runs the scripts described inside package.json to apply the linters analysis.
+
+# Packages being used
+
+    The main packages being used by that CI are:
+        1.  ESLint - The most popular JavaScript linter, a tool that analyzes code for errors, which can include stylistic errors but also coding errors that lead to bugs.
+                ESLint uses a config file called ".eslintrc.json" that describes the rules to be followed when analyzing code.
+        2.  Prettier - A tool used for analyzing the HTML, CSS, JSON and yml in our project for stylistic errors and errors that lead to bugs.
+                Prettier uses a config file called ".prettierrc.json" that describes the rules to be followed when analyzing code.
+
+# Linters usage
+
+    1.  If you wish to use those tools as part of your development process you should first install npm on your machine (it comes with the installment of Node.js).
+    2.  -   To install npm and Node.js on linux read this guide - https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/.
+        -   To install npm and Node.js on Windows download Node.js installer here - https://nodejs.org/.
+    3.  Run "npm install" from the root of this project.
+        A folder called "node_modules" should be created inside the current directory.
+    4.  -   To use ESLint run "npm run lint:eslint".
+        -   To use Prettier run "npm run lint:prettier".
+        -   To format the code run "npm run prettier:format".

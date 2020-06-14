@@ -4,10 +4,37 @@
 name: Python package
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Lint ESLint
+        run: npm run lint:eslint
+
+      - name: Lint Prettier
+        run: npm run lint:prettier
+
   build:
     runs-on: ubuntu-latest
     strategy:

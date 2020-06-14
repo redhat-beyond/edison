@@ -8,13 +8,12 @@ function capitalize(string) {
   if (typeof string !== 'string') return '';
   return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 }
-function createCommandField(policy)
-{
-  var commandRow = createInitElement('div', 'form-row')
-  var light =   createCommandFieldParameters('light', policy)
-  var ac =   createCommandFieldParameters('ac', policy);
-  var shutters =  createCommandFieldParameters('shutters', policy);
-    
+function createCommandField(policy) {
+  var commandRow = createInitElement('div', 'form-row');
+  var light = createCommandFieldParameters('light', policy);
+  var ac = createCommandFieldParameters('ac', policy);
+  var shutters = createCommandFieldParameters('shutters', policy);
+
   commandRow.appendChild(light);
   commandRow.appendChild(ac);
   commandRow.appendChild(shutters);
@@ -49,6 +48,7 @@ function createTextElementForUpdate(id, fieldName, field) {
 
   return groupName;
 }
+
 function createUpdateButton(classButton, id) {
   var updateButton = createInitElement('button', classButton, id);
 
